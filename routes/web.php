@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController as AuthAuthController;
 use Illuminate\Support\Facades\Route;
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:2685067153.
+Route::get('/login', [AuthAuthController::class, 'login']);
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:3929640191.
+Route::get('/register', [AuthAuthController::class, 'register']);
