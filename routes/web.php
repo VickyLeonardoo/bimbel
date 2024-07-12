@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController as AuthAuthController;
+// use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::get('/', function () {
 
 
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:2685067153.
-Route::get('/login', [AuthAuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'login']);
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:3929640191.
-Route::get('/register', [AuthAuthController::class, 'register']);
+Route::get('/register', [AuthController::class, 'register']);
+
+Route::post('/proses-login',[AuthController::class, 'prosesLogin'])->name('proses-login');
