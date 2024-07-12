@@ -29,7 +29,7 @@
     <!-- Main CSS File -->
     <link href="pendaftar/assets/css/main.css" rel="stylesheet">
 
-   
+
 </head>
 
 <body class="index-page">
@@ -55,8 +55,8 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted flex-md-shrink-0" href="login1.html">Login</a>
-            <a style="margin-left: .3cm;" class="btn btn btn-outline-primary" href="register1.html">Daftar</a>
+            <a class="btn-getstarted flex-md-shrink-0" href="{{route('login')}}">Login</a>
+            <a style="margin-left: .3cm;" class="btn btn btn-outline-primary" href="{{route('register')}}">Daftar</a>
 
         </div>
     </header>
@@ -73,37 +73,49 @@
                             class="img-fluid" alt="Sample image">
                     </div>
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form method="POST">
+                        @if (session('message'))
+                            <div class="alert alert-danger">
+                                {{ session('message') }}
+                            </div>
+                        @elseif (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        <form action="{{ route('proses-login') }}" method="POST">
+                            @csrf
                             <!-- Email input -->
                             <label class="form-label" for="form3Example3">Email address</label>
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="email" id="form3Example3" class="form-control form-control-lg"
-                                    placeholder="Enter a valid email address" />
+                                <input type="text" id="form3Example3" class="form-control form-control-lg"
+                                    placeholder="Enter a valid email address" name="email" />
+                                @error('email')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                @enderror
                             </div>
-    
+
                             <!-- Password input -->
                             <label class="form-label" for="form3Example4">Password</label>
                             <div data-mdb-input-init class="form-outline mb-3">
                                 <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                    placeholder="Enter password" />
+                                    placeholder="Enter password" name="password" />
+                                @error('password')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                @enderror
                             </div>
-    
-                           
-    
                             <div class="text-center text-lg-start mt-4 pt-2">
-                                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                    class="btn btn-primary btn-lg"
-                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                                <p style="font-size: large;" class="fw-bold mt-2 pt-1 mb-0">Lupa Password? <a href="#"
-                                        class="link-danger">Reset Password</a></p>
+                                <input type="submit" data-mdb-button-init data-mdb-ripple-init
+                                    class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                                    value="Login"></button>
+                                <p style="font-size: large;" class="fw-bold mt-2 pt-1 mb-0">Lupa Password? <a
+                                        href="#" class="link-danger">Reset Password</a></p>
                             </div>
-    
                         </form>
                     </div>
                 </div>
             </div>
 
-        </section><!-- /Hero Section -->
+        </section>
 
     </main>
 

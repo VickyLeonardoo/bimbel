@@ -9,8 +9,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/pendaftar/assets/img/favicon.png" rel="icon">
+    <link href="/pendaftar/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -20,14 +20,14 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/pendaftar/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/pendaftar/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/pendaftar/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/pendaftar/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/pendaftar/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="/pendaftar/assets/css/main.css" rel="stylesheet">
 
    
 </head>
@@ -39,7 +39,7 @@
 
             <a href="index.html" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="assets/img/logo.png" alt="">
+                <img src="/pendaftar/assets/img/logo.png" alt="">
                 <h1 class="sitename">BIMBEL</h1>
             </a>
 
@@ -55,8 +55,8 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted flex-md-shrink-0" href="login1.html">Login</a>
-            <a style="margin-left: .3cm;" class="btn btn btn-outline-primary" href="register1.html">Daftar</a>
+            <a class="btn-getstarted flex-md-shrink-0" href="{{route('login')}}">Login</a>
+            <a style="margin-left: .3cm;" class="btn btn btn-outline-primary" href="{{route('register')}}">Daftar</a>
 
         </div>
     </header>
@@ -73,35 +73,55 @@
                             class="img-fluid" alt="Sample image">
                     </div>
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form method="POST">
-
+                        <form method="POST" action="{{route('register')}}">
+                            @csrf
                             <!-- Name input -->
                             <label class="form-label" for="form3Example3">Nama</label>
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" id="form3Example3" class="form-control form-control-lg"/>
+                                <input type="text" id="form3Example3" name="name" class="form-control form-control-lg" value="{{ old('name') }}"/>
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
     
                             <!-- Phone input -->
                             <label class="form-label" for="form3Example3">Nomor HP</label>
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" id="form3Example3" class="form-control form-control-lg"/>
+                                <input type="text" id="form3Example3" name="phone" class="form-control form-control-lg" value="{{ old('phone') }}"/>
+                                @error('phone')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
     
                             <!-- Email input -->
                             <label class="form-label" for="form3Example3">Email</label>
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" id="form3Example3" class="form-control form-control-lg"/>
+                                <input type="text" id="form3Example3" name="email" class="form-control form-control-lg" value="{{ old('email') }}"/>
+                                @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
+
     
                             <!-- Password input -->
                             <label class="form-label" for="form3Example4">Password</label>
                             <div data-mdb-input-init class="form-outline mb-3">
-                                <input type="password" id="form3Example4" class="form-control form-control-lg"/>
+                                <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"/>
+                                @error('password')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <label class="form-label" for="form3Example4">Konfirmasi Password</label>
+                            <div data-mdb-input-init class="form-outline mb-3">
+                                <input type="password" id="form3Example4" name="password_confirmation" class="form-control form-control-lg"/>
+                                @error('password_confirmation')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
     
-    
                             <div class="text-center text-lg-start mt-4 pt-2">
-                                <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                     class="btn btn-primary btn-lg"
                                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Daftar</button>
                                 <p style="font-size: larger;" class="fw-bold mt-2 pt-1 mb-0">Sudah punya akun? <a href="login1.html"
@@ -186,17 +206,17 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/pendaftar/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/pendaftar/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/pendaftar/assets/vendor/aos/aos.js"></script>
+    <script src="/pendaftar/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/pendaftar/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/pendaftar/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="/pendaftar/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/pendaftar/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="/pendaftar/assets/js/main.js"></script>
 
 </body>
 
