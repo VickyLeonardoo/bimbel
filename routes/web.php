@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:2685067153.
-Route::get('/login', [AuthController::class, 'login']);
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3929640191.
-Route::get('/register', [AuthController::class, 'register']);
-
+//Authenticaiton
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/proses-login',[AuthController::class, 'prosesLogin'])->name('proses-login');
+Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
+Route::post('/register',[RegisterController::class, 'store'])->name('store.register');
