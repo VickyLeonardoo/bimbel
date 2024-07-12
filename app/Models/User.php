@@ -21,7 +21,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'role',
+        'is_active',
+        'is_verified'
     ];
+
+    public function verification(){
+        return $this->hasOne(UserVerification::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
