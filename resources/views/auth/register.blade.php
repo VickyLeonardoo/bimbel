@@ -40,7 +40,7 @@
             <a href="index.html" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="/pendaftar/assets/img/logo.png" alt="">
-                <h1 class="sitename">BIMBEL</h1>
+                <h1 class="sitename">BIMBEL TUC TEVA</h1>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -143,7 +143,7 @@
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
                     <a href="index.html" class="d-flex align-items-center">
-                        <span class="sitename">FlexStart</span>
+                        <span class="sitename">BIMBEL</span>
                     </a>
                     <div class="footer-contact pt-3">
                         <p>A108 Adam Street</p>
@@ -188,7 +188,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">FlexStart</strong> <span>All Rights
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">BIMBEL</strong> <span>All Rights
                     Reserved</span></p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->

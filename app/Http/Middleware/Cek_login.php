@@ -23,7 +23,7 @@ class Cek_login
         $user = Auth::user();
 
         if (in_array($user->role, $roles)) {
-            return $next($request);
+            return $next($request); 
         }
         return redirect('login')->with('message','Kamu Tidak Punya Akses, Silahkan Login terlebih dahulu!');
     }

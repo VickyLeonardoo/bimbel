@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'is_verified' => true,
                 'is_active' => true,
-                'role' => '1',
+                'role' => '2',
             ],
             [
                 'name' => 'User 2',
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'is_verified' => true,
                 'is_active' => true,
-                'role' => '1',
+                'role' => '2',
             ],
             [
                 'name' => 'User 3',
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'is_verified' => true,
                 'is_active' => true,
-                'role' => '1',
+                'role' => '2',
             ],
             [
                 'name' => 'User 4',
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'is_verified' => true,
                 'is_active' => true,
-                'role' => '1',
+                'role' => '2',
             ]
 
         ];

@@ -40,7 +40,7 @@
             <a href="index.html" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="pendaftar/assets/img/logo.png" alt="">
-                <h1 class="sitename">FlexStart</h1>
+                <h1 class="sitename">BIMBEL TUC TEVA</h1>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -55,8 +55,8 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted flex-md-shrink-0" href="{{route('login')}}">Login</a>
-            <a style="margin-left: .3cm;" class="btn btn btn-outline-primary" href="{{route('register')}}">Daftar</a>
+            <a class="btn-getstarted flex-md-shrink-0" href="/login">Login</a>
+            <a style="margin-left: .3cm;" class="btn btn btn-outline-primary" href="/register">Daftar</a>
 
         </div>
     </header>
@@ -170,7 +170,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">FlexStart</strong> <span>All Rights
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">BIMBEL</strong> <span>All Rights
                     Reserved</span></p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
