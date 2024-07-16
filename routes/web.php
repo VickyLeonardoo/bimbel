@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InstructorController;
 use Illuminate\Support\Facades\Route;
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,18 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/course', 'index')->name('admin.course');
             Route::get('/course/create', 'create')->name('admin.course.create');
             Route::post('/course/store', 'store')->name('admin.course.store');
-            
+            Route::get('/course/edit/{slug}', 'edit')->name('admin.course.edit');
+            Route::post('/course/update/{id}', 'update')->name('admin.course.update');
+            Route::get('/course/delete/{id}', 'delete')->name('admin.course.delete');
+        });
+
+        Route::controller(InstructorController::class)->group(function(){
+            Route::get('/instructor', 'index')->name('admin.instructor');
+            Route::get('/instructor/create', 'create')->name('admin.instructor.create');
+            Route::post('/instructor/store', 'store')->name('admin.instructor.store');
+            Route::get('/instructor/edit/{slug}', 'edit')->name('admin.instructor.edit');
+            Route::post('/instructor/update/{id}', 'update')->name('admin.instructor.update');
+            Route::get('/instructor/delete/{id}', 'delete')->name('admin.instructor.delete');
         });
 
     });
