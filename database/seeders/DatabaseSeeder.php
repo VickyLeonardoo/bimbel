@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         // ]);
        $this->call([
         UserSeeder::class, 
-        UserVerificationSeeder::class]);
+        UserVerificationSeeder::class,
+        CourseSeeder::class,
+    ]);
+        
     }
 }
