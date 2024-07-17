@@ -5,6 +5,7 @@
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Admin\VisionMissionController;
 use Illuminate\Support\Facades\Route;
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,17 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/instructor/delete/{id}', 'delete')->name('admin.instructor.delete');
         });
 
+        Route::controller(VisionMissionController::class)->group(function(){
+            Route::get('/visi', 'visi')->name('admin.visi');
+            Route::get('/visi/create', 'visi_create')->name('admin.visi.create');
+            Route::post('/visi/store', 'visi_store')->name('admin.visi.store');
+
+            Route::get('/misi', 'misi')->name('admin.misi');
+            Route::get('/misi/create', 'misi_create')->name('admin.misi.create');
+            Route::post('/misi/store', 'misi_store')->name('admin.misi.store');
+        });
+
+        
     });
 
 });
