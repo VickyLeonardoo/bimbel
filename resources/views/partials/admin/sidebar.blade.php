@@ -19,10 +19,16 @@
                 <span>Instructor</span>
             </a>
         </li>
-        <li class="sidebar-item {{Route::is('admin.instr.course*') ? 'active':''}}">
-            <a href="{{route('admin.instructor')}}" class='sidebar-link '>
+        <li class="sidebar-item {{Route::is('admin.visi*') ? 'active':''}}">
+            <a href="{{route('admin.visi')}}" class='sidebar-link '>
                 <i class="bi bi-file-earmark-medical-fill"></i>
-                <span>Instructor Course</span>
+                <span>Visi & Misi</span>
+            </a>
+        </li>
+        <li class="sidebar-item {{Route::is('admin.misi*') ? 'active':''}}">
+            <a href="{{route('admin.misi')}}" class='sidebar-link '>
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                <span>Misi</span>
             </a>
         </li>
         <li class="sidebar-title">Application</li>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <title>Dashboard - {{ $title }}</title>
 
 
 
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/app.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/iconly.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -30,8 +31,8 @@
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="{{ asset('admin') }}/assets/compiled/svg/logo.svg"
-                                    alt="Logo" srcset=""></a>
+                            {{-- <a href="index.html"><img src="{{ asset('admin') }}/assets/compiled/svg/logo.svg"
+                                    alt="Logo" srcset=""></a> --}}
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -93,12 +94,13 @@
                     </div>
                     <div class="float-end">
                         <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://saugi.me">Saugi</a></p>
+                            by <a href="https://saugi.me">Jariska</a></p>
                     </div>
                 </div>
             </footer>
         </div>
     </div>
+    @yield('js')
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', (event) => {
@@ -109,14 +111,7 @@
             });
         </script>
     @endif
-    <script>
-        document.getElementById('toast-success').addEventListener('click', () => {
-            Toast.fire({
-                icon: 'success',
-                title: 'Signed in successfully'
-            })
-        })
-    </script>
+
     <script src="{{ asset('admin') }}/assets/static/js/components/dark.js"></script>
     <script src="{{ asset('admin') }}/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
