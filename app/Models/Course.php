@@ -18,5 +18,11 @@ class Course extends Model
         'slug',
     ];
 
+    public function instructors()
+    {
+        return $this->belongsToMany(Instructor::class, 'instructor_courses');
+    }
+
+
     
 }
