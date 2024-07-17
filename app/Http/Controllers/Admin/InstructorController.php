@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Course;
 use App\Models\Instructor;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\EducationDetail;
+use App\Models\InstructorCourse;
 use App\Http\Controllers\Controller;
 
 class InstructorController extends Controller
@@ -19,36 +22,66 @@ class InstructorController extends Controller
     public function create(){
         return view('admin.instructor.create',[
             'title' => 'Create Instructor',
+            'courses' => Course::all(),
         ]);
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:instructors',
-            'phone' => 'required',
-            'address' => 'required',
-            'gender' => 'required',
-        ]);
+    public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:instructors',
+        'phone' => 'required',
+        'address' => 'required',
+        'gender' => 'required',
+        'level.*' => 'required', // Add validation for dynamic fields
+        'degree.*' => 'required',
+        'university.*' => 'required',
+        'course_instructor.*' => 'required'
+    ]);
 
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'gender' => $request->gender,
-            'slug' => Str::slug($request->name)
-        ];
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'address' => $request->address,
+        'gender' => $request->gender,
+        'slug' => Str::slug($request->name)
+    ];
 
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $hashName = $image->hashName();
-            $image->storeAs('public/instructor', $hashName);
-            $data['image'] = $hashName;
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $hashName = $image->hashName();
+        $image->storeAs('public/instructor', $hashName);
+        $data['image'] = $hashName;
+    }
+
+    $instructor = Instructor::create($data);
+
+    // Save Education Details
+    if ($request->filled('level')) {
+        foreach ($request->level as $key => $level) {
+            EducationDetail::create([
+                'instructor_id' => $instructor->id,
+                'level' => $level,
+                'degree' => $request->degree[$key],
+                'university' => $request->university[$key]
+            ]);
         }
-        Instructor::create($data);
-        return redirect()->route('admin.instructor')->with('success', 'Instructor successfully created');
     }
+
+    // Save Instructor Courses
+    if ($request->filled('course_instructor')) {
+        foreach ($request->course_instructor as $course_id) {
+            InstructorCourse::create([
+                'instructor_id' => $instructor->id,
+                'course_id' => $course_id
+            ]);
+        }
+    }
+
+    return redirect()->route('admin.instructor')->with('success', 'Instructor successfully created');
+}
 
     public function edit($slug){
         $instructor = Instructor::where('slug', $slug)->first();

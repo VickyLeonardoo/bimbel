@@ -44,8 +44,8 @@
                         <div class="form-group">
                             <label for="">Gender</label>
                             <select class="form-control" name="gender">
-                                <option value="m" {{$instructor->gender == 'm' ? 'selected' : ''}}>Male</option>
-                                <option value="f" {{$instructor->gender == 'f' ? 'selected' : ''}}>Female</option>
+                                <option value="m" {{ $instructor->gender == 'm' ? 'selected' : '' }}>Male</option>
+                                <option value="f" {{ $instructor->gender == 'f' ? 'selected' : '' }}>Female</option>
                             </select>
                             @error('gender')
                                 <small class="text-danger">{{ $message }}</small>
@@ -55,17 +55,85 @@
                             <label for="">Image</label> <br>
                             <input type="file" class="form-control-file form-control" name="image">
                             @if ($instructor->image)
-                                <img src="{{ asset('storage/instructor/' . $instructor->image) }}" width="100" alt="">
+                                <img src="{{ asset('storage/instructor/' . $instructor->image) }}" width="100"
+                                    alt="">
                             @endif
                             @error('image')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
-
-
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5>Education</h5>
+                            <div>
+                                <button class="btn btn-sm bg-primary text-white">Add</button>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Level</th>
+                                        <th>Degree</th>
+                                        <th>Univeristy</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($instructor->educationDetails as $education)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $education->level }}</td>
+                                        <td>{{ $education->degree }}</td>
+                                        <td>{{ $education->university }}</td>
+                                        <td>
+                                            <button class="btn btn-sm bg-info text-white">Edit</button>
+                                            <button class="btn btn-sm bg-danger text-white">Delete</button>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">No Data Found</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5>Course</h5>
+                            <div>
+                                <button class="btn btn-sm bg-primary text-white">Add</button>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Course</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($instructor->courses as $course)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $course->name }}</td>
+                                        <td>
+                                            <button class="btn btn-sm bg-info text-white">Edit</button>
+                                            <button class="btn btn-sm bg-danger text-white">Delete</button>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">No Data Found</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
