@@ -56,7 +56,7 @@
             </nav>
 
             <a class="btn-getstarted flex-md-shrink-0" href="{{route('login')}}">Login</a>
-            <a style="margin-left: .3cm;" class="btn btn btn-outline-primary" href="{{route('register')}}">Daftar</a>
+            <a class="btn-getstarted flex-md-shrink-0" href="{{route('register')}}">Daftar</a>
 
         </div>
     </header>
