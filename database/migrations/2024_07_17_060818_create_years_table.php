@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('years', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
-            $table->string('address')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->boolean('is_verified');
-            $table->boolean('is_active');
-            $table->enum('role',[1,2]);
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->enum('status',['active','inactive'])->default('active');
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('years');
     }
 };
