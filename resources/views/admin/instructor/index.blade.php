@@ -31,7 +31,7 @@
                                         <td>{{ $instructor->phone }}</td>
                                         <td> 
                                             @foreach ($instructor->courses as $course)
-                                            <li>{{$course->name}}</li>
+                                            <li>{{$course->name}}</li> 
                                             @endforeach
                                         </td>
                                         <td>
@@ -41,7 +41,6 @@
                                         </td>
                                         {{-- <td> {{ $instructor->address }} </td> --}}
                                         <td>
-                                            <a href="" class="btn btn-sm bg-warning text-white">Detail</a>
                                             <a href="{{ route('admin.instructor.edit', $instructor->slug) }}" class="btn btn-sm bg-primary text-white">EDIT</a>
                                             <a href="{{ route('admin.instructor.delete', $instructor->id) }}" class="btn btn-sm bg-danger text-white">DELETE</a>
                                         </td>

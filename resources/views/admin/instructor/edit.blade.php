@@ -69,7 +69,8 @@
                         <div class="col-lg-6">
                             <h5>Education</h5>
                             <div>
-                                <button class="btn btn-sm bg-primary text-white">Add</button>
+                                <button class="btn btn-sm bg-primary text-white" data-bs-toggle="modal"
+                                    data-bs-target="#modalEducation">Add</button>
                             </div>
                             <table class="table table-striped">
                                 <thead>
@@ -83,20 +84,20 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($instructor->educationDetails as $education)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $education->level }}</td>
-                                        <td>{{ $education->degree }}</td>
-                                        <td>{{ $education->university }}</td>
-                                        <td>
-                                            <button class="btn btn-sm bg-info text-white">Edit</button>
-                                            <button class="btn btn-sm bg-danger text-white">Delete</button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $education->level }}</td>
+                                            <td>{{ $education->degree }}</td>
+                                            <td>{{ $education->university }}</td>
+                                            <td>
+                                                <button class="btn btn-sm bg-danger text-white" data-bs-toggle="modal"
+                                                data-bs-target="#deleteEducation_{{$education->id}}">Delete</button>
+                                            </td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center">No Data Found</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="5" class="text-center">No Data Found</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -104,7 +105,11 @@
                         <div class="col-lg-6">
                             <h5>Course</h5>
                             <div>
-                                <button class="btn btn-sm bg-primary text-white">Add</button>
+                                @if ($courses->isEmpty())
+                                    <button class="btn btn-sm bg-primary text-white" disabled>No Courses Available</button>
+                                @else
+                                    <button class="btn btn-sm bg-primary text-white" data-bs-toggle="modal" data-bs-target="#modalCourse">Add</button>
+                                @endif
                             </div>
                             <table class="table table-striped">
                                 <thead>
@@ -116,28 +121,39 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($instructor->courses as $course)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $course->name }}</td>
-                                        <td>
-                                            <button class="btn btn-sm bg-info text-white">Edit</button>
-                                            <button class="btn btn-sm bg-danger text-white">Delete</button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $course->name }}</td>
+                                            <td>
+                                                <button class="btn btn-sm bg-danger text-white" data-bs-toggle="modal"
+                                                data-bs-target="#deleteCourse_{{$course->id}}">Delete</button>
+                                            </td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center">No Data Found</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-center">No Data Found</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
         </div>
-
     </section>
+    
+    @include('admin.instructor.modal')
+    
+@endsection
+@section('js')
+    <script>
+        @if ($errors->any())
+        $(document).ready(function() {
+            $('#modalEducation').modal('show');
+        });
+    @endif
+    </script>
 @endsection
