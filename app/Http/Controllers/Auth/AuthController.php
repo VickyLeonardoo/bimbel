@@ -40,7 +40,7 @@ class AuthController extends Controller
                 if ($user->is_active == '0') {
                     return redirect()->route('otp.show');
                 }else{
-                    return redirect()->route('pelanggan.dashboard')->with('message','Selamat Datang, Ingin Mengorder Laundry Hari ini?');
+                    return redirect()->route('client.profile')->with('message','Selamat Datang, Ingin Mengorder Laundry Hari ini?');
                 }
             }
         }

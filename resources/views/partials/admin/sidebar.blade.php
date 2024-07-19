@@ -22,13 +22,19 @@
         <li class="sidebar-item {{Route::is('admin.visi*') ? 'active':''}}">
             <a href="{{route('admin.visi')}}" class='sidebar-link '>
                 <i class="bi bi-file-earmark-medical-fill"></i>
-                <span>Visi & Misi</span>
+                <span>Visi</span>
             </a>
         </li>
         <li class="sidebar-item {{Route::is('admin.misi*') ? 'active':''}}">
             <a href="{{route('admin.misi')}}" class='sidebar-link '>
                 <i class="bi bi-file-earmark-medical-fill"></i>
                 <span>Misi</span>
+            </a>
+        </li>
+        <li class="sidebar-item {{Route::is('admin.year*') ? 'active':''}}">
+            <a href="{{route('admin.year')}}" class='sidebar-link '>
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                <span>Year</span>
             </a>
         </li>
         <li class="sidebar-title">Application</li>
@@ -40,3 +46,4 @@
         </li>
     </ul>
 </div>
+

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\YearController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/dashboard', 'index')->name('admin.dashboard');
         });
 
-        Route::controller(CourseController::class)->group(function(){
+        Route::controller(CourseController::class)->group(function(){ 
             Route::get('/course', 'index')->name('admin.course');
             Route::get('/course/create', 'create')->name('admin.course.create');
             Route::post('/course/store', 'store')->name('admin.course.store');
@@ -57,6 +58,11 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/instructor/edit/{slug}', 'edit')->name('admin.instructor.edit');
             Route::post('/instructor/update/{id}', 'update')->name('admin.instructor.update');
             Route::get('/instructor/delete/{id}', 'delete')->name('admin.instructor.delete');
+
+            Route::post('/instructor/edit/education/{id}', 'editAddEducation')->name('admin.instructor.edit.add.education');
+            Route::post('/instructor/edit/course/{id}', 'editAddCourse')->name('admin.instructor.edit.add.course');
+            Route::get('/instructor/delete/education/{id}', 'deleteEducation')->name('admin.instructor.delete.education');
+            Route::get('/instructor/delete/course/{id}', 'deleteCourse')->name('admin.instructor.delete.course');
         });
 
         Route::controller(VisionMissionController::class)->group(function(){
@@ -68,8 +74,15 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/misi/create', 'misi_create')->name('admin.misi.create');
             Route::post('/misi/store', 'misi_store')->name('admin.misi.store');
         });
-
         
+        Route::controller(YearController::class)->group(function(){
+            Route::get('/year', 'index')->name('admin.year');
+            Route::get('/year/create', 'create')->name('admin.year.create');
+            Route::post('/year/store', 'store')->name('admin.year.store');
+            Route::get('/year/edit/{id}', 'edit')->name('admin.year.edit');
+            Route::post('/year/update/{id}', 'update')->name('admin.year.update');
+            Route::get('/year/delete/{id}', 'delete')->name('admin.year.delete');
+            Route::get('/year/update/status/{id}', 'updateStatus')->name('admin.year.update.status');
+        });
     });
-
 });
