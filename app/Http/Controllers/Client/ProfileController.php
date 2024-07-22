@@ -62,11 +62,35 @@ class ProfileController extends Controller
         // Redirect or return a response
         return redirect()->route('client.profile')->with('success', 'Children added successfully.');
     }
-    public function editChildren()
+    public function editChildren($id)
     {
-        return view('client.child.edit');
+        return view('client.child.edit',[
+            'child' => Child::find($id)
+        ]);
     }
-    public function updateChildren()
+    public function updateChildren(Request $request,$id)
     {
+        $request->validate([
+            'name' => 'required',
+            'school' => 'required',
+            'bod' => 'required',
+            'class' => 'required',
+        ]);
+
+        $child = Child::find($id);
+        $child->name = request('name');
+        $child->school = request('school');
+        $child->bod = request('bod');
+        $child->class = request('class');
+        $child->save();
+
+        return redirect()->route('client.profile')->with('success', 'Children updated successfully.');
+    }
+
+    public function deleteChildren($id)
+    {
+        $child = Child::find($id);
+        $child->delete();
+        return redirect()->route('client.profile')->with('success', 'Children deleted successfully.');
     }
 }

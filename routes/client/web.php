@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\OrderController;
+use App\Http\Controllers\Client\TransactionController;
 
 Route::group(['middleware' => ['auth:user']],function(){
     Route::group(['middleware' => ['cek_login:2']],function(){
@@ -18,12 +20,30 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/client/add_children', 'storeChildren')->name('client.store_children');
             Route::get('/client/edit_children/{id}', 'editChildren')->name('client.edit_children');
             Route::post('/client/edit_children/{id}', 'updateChildren')->name('client.update_children');
+            Route::get('/client/delete_children/{id}', 'deleteChildren')->name('client.delete_children');
+
+        });
+
+        Route::controller(HomeController::class)->group(function(){
+            Route::get('/client/home', 'index')->name('client.home');
+
+
+        });
+
+        Route::controller(TransactionController::class)->group(function(){
+            Route::get('/client/transaction', 'index')->name('client.transaction');
+            Route::get('/client/transaction/create', 'create')->name('client.transaction.create');
+            Route::get('/client/transaction/{id}', 'show')->name('client.transaction.show');
+            Route::post('/client/transaction', 'store')->name('client.transaction.store');
+            Route::get('/client/transaction/{id}/edit', 'edit')->name('client.transaction.edit');
+            Route::post('/client/transaction/{id}/update', 'update')->name('client.transaction.update');
 
         });
 
         Route::controller(OrderController::class)->group(function(){
             Route::get('/order', 'index')->name('pelanggan.order');
-
         });
+
+        
     });
 });

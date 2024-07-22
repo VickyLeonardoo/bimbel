@@ -45,13 +45,12 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="#hero">Home<br></a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="{{route('client.home')}}">Home<br></a></li>
                     <li><a href="#services">Programme</a></li>
                     <li><a href="#team">Team</a></li>
                     <!-- <li><a href="blog-details.html">Blog</a></li> -->
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="transaksi.html">Transaksi</a></li>
+                    <li><a href="{{route('client.transaction')}}">Transaction</a></li>
                     @if (auth()->user())
                     <li class="dropdown"><a href="{{route('client.profile')}}" class="{{Route::is('client.*') ? 'active':''}}"><span> | Profile</span></i></a>
                     @endif
@@ -71,10 +70,8 @@
 
     <main style="margin-top: 3cm;" class="main" >
         <!-- Hero Section -->
-        <section class="section" style="background-color: #f4f5f7">
-            @yield('content')
-
-        </section>
+        @yield('content')
+        
         <!-- /Hero Section -->
 
     </main>

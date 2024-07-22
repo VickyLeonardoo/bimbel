@@ -8,7 +8,7 @@
                     <div class="card-body">
 
                         <a href="{{route('client.profile')}}" class=" btn form-control btn-outline-primary mb-3 {{Route::is('client.profile') ? 'active':''}}">Profile</a>
-                        <a href="#" class=" btn form-control btn-outline-primary">Transaksi</a>
+                        <a href="{{route('client.transaction')}}" class=" btn form-control btn-outline-primary">Transaction</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,9 @@
                                 <td> {{$child->school}} </td>
                                 <td> {{Carbon\Carbon::parse($child->birthday)->format('d F Y')}} </td>
                                 <td> {{$child->class}} </td>
-                                <td><a href="{{route('client.edit_children',$child->id)}}" class="badge bg-primary">Edit</a></td>
+                                <td><a href="{{route('client.edit_children',$child->id)}}" class="badge bg-primary">Edit</a>
+                                    <a href="{{route('client.delete_children',$child->id)}}" class="badge bg-danger">Delete</a>
+                                </td>
                             </tr>
                             @empty
                                 <tr class="text-center">

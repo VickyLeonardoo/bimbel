@@ -22,4 +22,9 @@ class Child extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function orderItem()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
 }

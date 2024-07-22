@@ -18,4 +18,8 @@ class OrderItem extends Model
     public function course(){
         return $this->belongsTo(Course::class);
     }
+
+    public function child(){
+        return $this->belongsTo(Child::class);
+    }
 }
