@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/client/edit_children/{id}', 'editChildren')->name('client.edit_children');
             Route::post('/client/edit_children/{id}', 'updateChildren')->name('client.update_children');
             Route::get('/client/delete_children/{id}', 'deleteChildren')->name('client.delete_children');
-
+ 
         });
 
         Route::controller(HomeController::class)->group(function(){

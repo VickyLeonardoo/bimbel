@@ -24,6 +24,6 @@ class Order extends Model
     }
     
     public function course(){
-        return $this->belongsToMany(Course::class, 'order_items')->withPivot('harga');
+        return $this->belongsToMany(Course::class, 'order_items')->withPivot('price');
     }
 }
