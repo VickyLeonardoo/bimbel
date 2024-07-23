@@ -21,7 +21,8 @@
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Vendor CSS Files -->
     <link href="{{ asset('pendaftar') }}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('pendaftar') }}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -31,6 +32,12 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('pendaftar') }}/assets/css/main.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+
 </head>
 
 <body class="index-page d-flex flex-column min-vh-100" style="background-color: #f4f5f7">
@@ -77,13 +84,15 @@
     </main>
 
     @include('partials.client.footer')
-    @yield('js')
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Vendor JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="{{ asset('pendaftar') }}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('pendaftar') }}/assets/vendor/php-email-form/validate.js"></script>
     <script src="{{ asset('pendaftar') }}/assets/vendor/aos/aos.js"></script>
@@ -95,6 +104,7 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('pendaftar') }}/assets/js/main.js"></script>
+    @yield('js')
 
 </body>
 
