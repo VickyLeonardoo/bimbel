@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->references('id')->on('orders');
             $table->foreignId('child_id')->references('id')->on('children');
             $table->foreignId('course_id')->references('id')->on('courses');
-            $table->decimal('harga', 15, 2);
+            $table->decimal('price', 15, 2);
             $table->timestamps();
         });
     }

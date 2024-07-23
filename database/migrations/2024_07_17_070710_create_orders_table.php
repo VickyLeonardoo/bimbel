@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('year_id')->references('id')->on('years');
-            $table->string('order_no');
-            $table->string('name');
+            $table->string('reg_no');
             $table->date('date_order');
-            $table->float('total');
+            $table->float('total',15,2);
             $table->enum('status',['draft','confirmed','payment_reveived','cancelled']);
-            $table->text('payment_image');
+            $table->text('payment_image')->nullable();
             $table->timestamps();
         });
     }
