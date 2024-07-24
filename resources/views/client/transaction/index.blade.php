@@ -68,7 +68,7 @@
                                                 @endif
                                             </td>
                                             <td style="vertical-align: middle">
-                                                <a href="#" class="btn btn-sm btn-primary">Details</a>
+                                                <a href="{{ route('client.transaction.show', $order->id) }}" class="btn btn-sm btn-primary">Details</a>
                                                 <a href="#" class="btn btn-sm btn-success">Upload Payment</a>
                                             </td>
                                         </tr>

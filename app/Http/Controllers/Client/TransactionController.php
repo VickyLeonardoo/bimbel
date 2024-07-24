@@ -32,6 +32,14 @@ class TransactionController extends Controller
         ]);
     }
 
+    public function show($id){
+        $order = Order::findOrFail($id);
+        $order->unique_courses = $order->course->unique('name');
+        $order->unique_child = $order->child->unique('name');
+        // return $order;
+        return view('client.transaction.show',compact('order'));
+    }
+
     public function store(Request $request)
 {
     $request->validate([

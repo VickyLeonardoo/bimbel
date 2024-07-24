@@ -37,7 +37,6 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/client/transaction', 'store')->name('client.transaction.store');
             Route::get('/client/transaction/{id}/edit', 'edit')->name('client.transaction.edit');
             Route::post('/client/transaction/{id}/update', 'update')->name('client.transaction.update');
-
         });
 
         Route::controller(OrderController::class)->group(function(){

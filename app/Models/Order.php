@@ -26,4 +26,11 @@ class Order extends Model
     public function course(){
         return $this->belongsToMany(Course::class, 'order_items')->withPivot('price');
     }
+
+    public function child(){
+        return $this->belongsToMany(Child::class, 'order_items');
+    }
+
+    
+    
 }

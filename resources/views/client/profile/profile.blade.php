@@ -18,7 +18,7 @@
                 <div class="card-body">
                     @if (session('success'))
                             <div class="alert alert-success alert-dismissible show fade">
-                                Profile update successfully.
+                                {{session('success')}}.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
