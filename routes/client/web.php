@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\TransactionController;
@@ -37,6 +37,10 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/client/transaction', 'store')->name('client.transaction.store');
             Route::get('/client/transaction/{id}/edit', 'edit')->name('client.transaction.edit');
             Route::post('/client/transaction/{id}/update', 'update')->name('client.transaction.update');
+            Route::get('/client/transaction/{id}/upload', 'viewUpload')->name('client.transaction.page.upload');
+            Route::post('/client/transaction/{id}/upload', 'upload')->name('client.transaction.upload');
+
+
         });
 
         Route::controller(OrderController::class)->group(function(){
