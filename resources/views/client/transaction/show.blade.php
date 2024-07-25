@@ -120,16 +120,12 @@
                             </table>
                         </div><!--End Table-->
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div>
                                     <p class="legal">Silahkan transfer ke rekening <strong>Mandiri: 1090020804423. AN Bimbel BUC TEVA.</strong>
                                     </p>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                {{-- <form class="text-right">
-                                    <input type="image" src="../assets/images/paypal.png"  name="submit" alt="PayPal - The safer, easier way to pay online!">
-                                </form> --}}
+                                
                             </div>
                         </div>
                     </div>
