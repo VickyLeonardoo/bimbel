@@ -5,6 +5,7 @@
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\VisionMissionController;
 use Illuminate\Support\Facades\Route;
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
@@ -85,5 +86,8 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/year/update/status/{id}', 'updateStatus')->name('admin.year.update.status');
         });
 
+        Route::controller(TransactionController::class)->group(function(){
+            Route::get('/transaction', 'index')->name('admin.transaction');
+        });
     });
 });
