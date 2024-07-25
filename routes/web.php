@@ -84,5 +84,6 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/year/delete/{id}', 'delete')->name('admin.year.delete');
             Route::get('/year/update/status/{id}', 'updateStatus')->name('admin.year.update.status');
         });
+
     });
 });
