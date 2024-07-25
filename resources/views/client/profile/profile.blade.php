@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="col-md-10">
-            <div class="card">
+            <div class="card mb-5">
                 <div class="card-body">
                     @if (session('success'))
                             <div class="alert alert-success alert-dismissible show fade">
@@ -35,15 +35,15 @@
                     <div class="row mb-3">
                         <div class="col-md-6 mt-3">
                             <label for="">Nama</label>
-                            <input type="text" class="form-control" disabled value="Vicky Leonardo Manurung">
+                            <input type="text" class="form-control" disabled value="{{ auth()->user()->name }}">
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" disabled value="Vicky Leonardo Manurung">
+                            <input type="text" class="form-control" disabled value="{{ auth()->user()->email }}">
                         </div>
                         <div class="col-md-12-mt-3">
                             <label for="">Alamat</label>
-                            <textarea name="" class="form-control" disabled cols="3" id="">Bengkong Telaga Indah Blok F/19</textarea>
+                            <textarea name="" class="form-control" disabled cols="3" id="">{{ auth()->user()->address }}</textarea>
                         </div>
                     </div>
                     <hr>
