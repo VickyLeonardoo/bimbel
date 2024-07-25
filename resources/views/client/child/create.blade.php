@@ -9,7 +9,7 @@
 
                             <a href="{{ route('client.profile') }}"
                                 class=" btn form-control btn-outline-primary mb-3 {{ Route::is('client.*') ? 'active' : '' }}">Profile</a>
-                            <a href="#" class=" btn form-control btn-outline-primary">Transaction</a>
+                            <a href="{{ route('client.transaction') }}" class=" btn form-control btn-outline-primary">Transaction</a>
                         </div>
                     </div>
                 </div>
