@@ -54,9 +54,9 @@
                                 <div class="card-body">
                                     @if ($order->payment_image)
                                     <img src="{{ asset('storage/transaction/' . $order->payment_image) }}" class="img-fluid">
-                                @else
-                                    <img src="{{ asset('assets/err.png') }}" alt="Not Found" class="img-fluid">
-                                @endif
+                                    @else
+                                        <img src="{{ asset('assets/err.png') }}" alt="Not Found" class="img-fluid">
+                                    @endif
                                 </div>
                             </div>
                         </div>

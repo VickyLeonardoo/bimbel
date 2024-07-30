@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('reg_no');
             $table->date('date_order');
             $table->float('total',15,2);
-            $table->enum('status',['draft','confirmed','payment_reveived','cancelled']);
+            $table->enum('status',['draft','confirmed','payment_received','cancelled']);
             $table->text('payment_image')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

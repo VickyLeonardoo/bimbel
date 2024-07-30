@@ -113,6 +113,7 @@ class TransactionController extends Controller
             $hashName = $image->hashName();
             $image->storeAs('public/transaction', $hashName);
             $order->payment_image = $hashName;
+            $order->status = 'confirmed';
         }
         $order->save();
         return redirect()->route('client.transaction')->with('success', 'Payment proof uploaded successfully.');

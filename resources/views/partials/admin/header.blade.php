@@ -14,13 +14,13 @@
         type="image/png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{ asset('admin') }}/assets/extensions/simple-datatables/style.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/extensions/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/table-datatable.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/app.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/iconly.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .sidebar-menu {
     display: flex;
@@ -161,7 +161,40 @@
             </footer>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script src="{{ asset('admin') }}/assets/static/js/components/dark.js"></script>
+    <script src="{{ asset('admin') }}/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="{{ asset('admin') }}/assets/compiled/js/app.js"></script>
+    <script src="{{ asset('admin') }}/assets/extensions/sweetalert2/sweetalert2.min.js"></script>>
+    <script src="{{ asset('admin') }}/assets/static/js/pages/sweetalert2.js"></script>>
+    <!-- Need: Apexcharts -->
+    {{-- <script src="{{ asset('admin') }}/assets/extensions/apexcharts/apexcharts.min.js"></script> --}}
+    <script src="{{ asset('admin') }}/assets/static/js/pages/dashboard.js"></script>
+    <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+            });
+        });
+    </script>
     @yield('js')
+
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', (event) => {
@@ -172,22 +205,6 @@
             });
         </script>
     @endif
-    
-    
-    <script src="{{ asset('admin') }}/assets/static/js/components/dark.js"></script>
-    <script src="{{ asset('admin') }}/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-
-    <script src="{{ asset('admin') }}/assets/compiled/js/app.js"></script>
-    <script src="{{ asset('admin') }}/assets/extensions/sweetalert2/sweetalert2.min.js"></script>>
-    <script src="{{ asset('admin') }}/assets/static/js/pages/sweetalert2.js"></script>>
-
-
-    <!-- Need: Apexcharts -->
-    <script src="{{ asset('admin') }}/assets/extensions/apexcharts/apexcharts.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/static/js/pages/dashboard.js"></script>
-    <script src="{{ asset('admin') }}/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="{{ asset('admin') }}/assets/static/js/pages/simple-datatables.js"></script>
 </body>
 
 </html>

@@ -32,7 +32,7 @@
                         <h3>Transaction List</h3>
                         <a href="{{ route('client.transaction.create') }}" class="btn btn-sm btn-primary">Add</a>
                         <div class="table-responsive">
-                            <table class="table table-striped mt-3">
+                            <table class="table table-striped mt-3" id="table1">
                                 <thead>
                                     <tr">
                                         <th style="background-color: #111d5e;" class="text-white">No</th>
@@ -44,7 +44,7 @@
                                         </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (auth()->user()->order as $order)
+                                    @forelse (auth()->user()->order as $order)
                                         <tr>
                                             <td style="vertical-align: middle">{{ $loop->iteration }}</td>
                                             <td style="vertical-align: middle">{{ $order->reg_no }}</td>
@@ -64,7 +64,14 @@
                                             <td style="vertical-align: middle">@currency($order->total)</td>
                                             <td style="vertical-align: middle">
                                                 @if ($order->status == 'draft')
-                                                    <span class="badge bg-info">Draft</span>
+                                                    <span class="badge bg-warning">Draft</span>
+                                                @elseif ($order->status == 'confirmed')
+                                                    <span class="badge bg-primary">Pending</span>
+
+                                                @elseif ($order->status == 'payment_received')
+                                                    <span class="badge bg-success">Payment Receive</span>
+                                                @else
+                                                    <span class="badge bg-danger">Cancelled</span>
                                                 @endif
                                             </td>
                                             <td style="vertical-align: middle">
@@ -72,7 +79,11 @@
                                                 <a href="{{ route('client.transaction.upload', $order->id) }}" class="btn btn-sm btn-success">Upload Payment</a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">No Transaction Data Found</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

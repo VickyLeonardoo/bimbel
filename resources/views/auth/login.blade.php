@@ -45,8 +45,7 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="#hero" class="active">Home<br></a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="/" class="active">Home<br></a></li>
                     <li><a href="#services">Programme</a></li>
                     <li><a href="#team">Team</a></li>
                     <!-- <li><a href="blog-details.html">Blog</a></li> -->
@@ -139,7 +138,7 @@
                 <div class="col-lg-2 col-md-3 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="/">Home</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>

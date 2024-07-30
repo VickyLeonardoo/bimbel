@@ -53,10 +53,10 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="{{route('client.home')}}">Home<br></a></li>
-                    <li><a href="#services">Programme</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="">Programme</a></li>
                     <li><a href="#team">Team</a></li>
                     <!-- <li><a href="blog-details.html">Blog</a></li> -->
-                    <li><a href="#contact">Contact</a></li>
                     <li><a href="{{route('client.transaction')}}">Transaction</a></li>
                     @if (auth()->user())
                     <li class="dropdown"><a href="{{route('client.profile')}}" class="{{Route::is('client.*') ? 'active':''}}"><span> | Profile</span></i></a>
@@ -65,7 +65,7 @@
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-            @if (!auth()->user())
+            @if (!Auth::guard('user')->user())
             <a class="btn-getstarted flex-md-shrink-0" href="login1.html">Login</a>
             <a class="btn-getstarted flex-md-shrink-0" href="login1.html">Daftar</a>
             @else

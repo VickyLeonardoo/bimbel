@@ -6,6 +6,11 @@ use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\TransactionController;
 
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/client/home', 'index')->name('client.home');
+    Route::get('/client/programme','index')->name('client.programme');
+});
+
 Route::group(['middleware' => ['auth:user']],function(){
     Route::group(['middleware' => ['cek_login:2']],function(){
 
@@ -24,11 +29,7 @@ Route::group(['middleware' => ['auth:user']],function(){
  
         });
 
-        Route::controller(HomeController::class)->group(function(){
-            Route::get('/client/home', 'index')->name('client.home');
-
-
-        });
+        
 
         Route::controller(TransactionController::class)->group(function(){
             Route::get('/client/transaction', 'index')->name('client.transaction');

@@ -2,17 +2,20 @@
 
 // use App\Http\Controllers\Auth\AuthController;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\YearController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
+use App\Http\Controllers\AdminEnrollmentController;
+use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\VisionMissionController;
-use Illuminate\Support\Facades\Route;
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\YearController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +28,9 @@ use App\Http\Controllers\YearController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+//Landing Page
+Route::get('/',[HomeController::class, 'index']);
 
 //Authenticaiton
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -42,7 +45,7 @@ Route::group(['middleware' => ['auth:user']],function(){
         Route::controller(DashboardController::class)->group(function(){
             Route::get('/dashboard', 'index')->name('admin.dashboard');
         });
-
+ 
         Route::controller(CourseController::class)->group(function(){ 
             Route::get('/course', 'index')->name('admin.course');
             Route::get('/course/create', 'create')->name('admin.course.create');
@@ -88,6 +91,17 @@ Route::group(['middleware' => ['auth:user']],function(){
 
         Route::controller(TransactionController::class)->group(function(){
             Route::get('/transaction', 'index')->name('admin.transaction');
+            Route::get('/transaction/{id}/show', 'show')->name('admin.transaction.show');
+            Route::get('/transaction/{id}/set-cancel', 'setCancel')->name('admin.transaction.set.cancel');
+            Route::get('/transaction/{id}/set-payment-receive', 'setPaymentReceive')->name('admin.transaction.set.payment.receive');
+            Route::get('/transaction/{id}/set-archive', 'setArchive')->name('admin.transaction.set.archive');
         });
+
+        Route::controller(EnrollmentController::class)->group(function(){
+            Route::get('/enrollment', 'index')->name('admin.enrollment');
+            Route::get('/enrollment/{course_id}/', 'show')->name('admin.enrollment.show');
+            Route::get('/enrollment/{id}/update-status', 'updateStatus')->name('admin.enrollment.update.status');
+        });
+
     });
 });

@@ -38,12 +38,31 @@
             </a>
         </li>
         <li class="sidebar-title">Application</li>
+        <li class="sidebar-item {{ Route::is('admin.transaction*') ? 'active':'' }}">
+            <a href="{{ route('admin.transaction') }}" class='sidebar-link '>
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                <span>Application</span>
+            </a>
+        </li>
+        <li class="sidebar-item {{ Route::is('admin.enrollment*') ? 'active':'' }}">
+            <a href="{{ route('admin.enrollment') }}" class='sidebar-link '>
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                <span>Enrollment</span>
+            </a>
+        </li>
+        <li class="sidebar-title">Bimbel BUC Teva</li>
         <li class="sidebar-item">
             <a href="" class='sidebar-link '>
                 <i class="bi bi-file-earmark-medical-fill"></i>
-                <span>Pre Application</span>
+                <span>Attending</span>
             </a>
         </li>
+        {{-- <li class="sidebar-item">
+            <a href="" class='sidebar-link '>
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                <span>Enrollment</span>
+            </a>
+        </li> --}}
     </ul>
 </div>
 

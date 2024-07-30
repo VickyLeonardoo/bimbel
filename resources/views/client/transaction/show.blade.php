@@ -64,7 +64,7 @@
                             <span class="badge badge-sm bg-warning">Draft</span>
                         @elseif ($order->status == 'confirmed')
                             <span class="badge badge-sm bg-primary">Pending</span>
-                        @elseif ($order->status == 'payment_receive')
+                        @elseif ($order->status == 'payment_received')
                             <span class="badge badge-sm bg-success">Payment Receive</span>
                         @else
                             <span class="badge badge-sm bg-danger">Cancelled</span>

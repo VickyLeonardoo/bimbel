@@ -12,8 +12,8 @@ class HomeController extends Controller
         return view('client.home.home');
     }
 
-    public function homeProgramme(){
-        
+    public function programme(){
+        return view('client.home.programme');
     }
 
 

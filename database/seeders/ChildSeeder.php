@@ -36,6 +36,27 @@ class ChildSeeder extends Seeder
                 'school' => 'Yos Sudarso',
                 'bod' => '2024-01-01',
                 'class' => 'X',
+            ],
+            [
+                'user_id' => 3,
+                'name' => 'Tretan',
+                'school' => 'Yos Sudarso',
+                'bod' => '2024-01-01',
+                'class' => 'X',
+            ],
+            [
+                'user_id' => 4,
+                'name' => 'Rizki',
+                'school' => 'Yos Sudarso',
+                'bod' => '2024-01-01',
+                'class' => 'X',
+            ],
+            [
+                'user_id' => 4,
+                'name' => 'Prazz',
+                'school' => 'Yos Sudarso',
+                'bod' => '2024-01-01',
+                'class' => 'X',
             ]
         ];
         foreach ($childs as $child) {
