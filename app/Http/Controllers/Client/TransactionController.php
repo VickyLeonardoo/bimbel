@@ -119,5 +119,4 @@ class TransactionController extends Controller
         return redirect()->route('client.transaction')->with('success', 'Payment proof uploaded successfully.');
     }
 
-
 }

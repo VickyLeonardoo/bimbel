@@ -54,8 +54,8 @@
                 <ul>
                     <li><a href="{{route('client.home')}}">Home<br></a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="">Programme</a></li>
-                    <li><a href="#team">Team</a></li>
+                    <li><a href="{{ route('client.programme') }}">Programme</a></li>
+                    <li><a href="{{ route('client.instructor') }}">Team</a></li>
                     <!-- <li><a href="blog-details.html">Blog</a></li> -->
                     <li><a href="{{route('client.transaction')}}">Transaction</a></li>
                     @if (auth()->user())
@@ -66,8 +66,8 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
             @if (!Auth::guard('user')->user())
-            <a class="btn-getstarted flex-md-shrink-0" href="login1.html">Login</a>
-            <a class="btn-getstarted flex-md-shrink-0" href="login1.html">Daftar</a>
+            <a class="btn-getstarted flex-md-shrink-0" href="{{ route('login') }}">Login</a>
+            <a class="btn-getstarted flex-md-shrink-0" href="{{ route('register') }}">Daftar</a>
             @else
             <a class="btn-getstarted flex-md-shrink-0" href="{{route('logout')}}">Logout</a>
             @endif

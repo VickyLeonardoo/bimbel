@@ -8,7 +8,8 @@ use App\Http\Controllers\Client\TransactionController;
 
 Route::controller(HomeController::class)->group(function(){
     Route::get('/client/home', 'index')->name('client.home');
-    Route::get('/client/programme','index')->name('client.programme');
+    Route::get('/client/programme','programme')->name('client.programme');
+    Route::get('/client/instructor','instructor')->name('client.instructor');
 });
 
 Route::group(['middleware' => ['auth:user']],function(){
@@ -26,7 +27,6 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/client/edit_children/{id}', 'editChildren')->name('client.edit_children');
             Route::post('/client/edit_children/{id}', 'updateChildren')->name('client.update_children');
             Route::get('/client/delete_children/{id}', 'deleteChildren')->name('client.delete_children');
- 
         });
 
         
