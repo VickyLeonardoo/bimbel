@@ -21,6 +21,7 @@ class CourseSeeder extends Seeder
             'code' => 'PW', 
             'price' => 1000000,
             'slug' => 'pemrograman-web',
+            'sesi' => 16,
             ],
             [
             'name' => 'Desain Grafis', 
@@ -29,6 +30,7 @@ class CourseSeeder extends Seeder
             'code' => 'DF', 
             'price' => 800000,
             'slug' => 'desain-grafis',
+            'sesi' => 16,
             ],
         ];
         foreach ($courses as $course) {

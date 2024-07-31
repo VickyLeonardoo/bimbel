@@ -42,10 +42,12 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/client/transaction/{id}/upload', 'upload')->name('client.transaction.upload');
 
 
+            
         });
 
         Route::controller(OrderController::class)->group(function(){
             Route::get('/order', 'index')->name('pelanggan.order');
+            Route::get('/order/{id}', 'show')->name('pelanggan.order.show');
         });
 
         

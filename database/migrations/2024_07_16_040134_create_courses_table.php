@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->integer('price');
             $table->text('description');
+            $table->integer('sesi');
             $table->text('image');
             $table->string('slug')->unique();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

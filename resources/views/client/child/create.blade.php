@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="class">Class</label>
-                                        <input type="text" name="class[]" class="form-control" value="{{ old('class') }}" placeholder="">
+                                        <input type="text" name="class[]" placeholder="i.e 1,2,3,4,5,6,7,8,9,10,11,12" class="form-control" value="{{ old('class') }}" placeholder="">
                                     </div>
                                     <div class="form-group">
                                         <button type="button" class="btn btn-danger remove-card"><i class="fas fa-minus"></i> Remove</button>

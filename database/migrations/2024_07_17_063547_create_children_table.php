@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('school');
             $table->date('bod');
-            $table->string('class');
+            $table->enum('class',['1','2','3','4','5','6','7','8','9','10','11','12']);
             $table->string('photo')->nullable();
             $table->timestamps();
         });

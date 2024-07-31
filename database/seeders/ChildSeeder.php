@@ -19,7 +19,7 @@ class ChildSeeder extends Seeder
                 'name' => 'Evelyn',
                 'school' => 'Yos Sudarso',
                 'bod' => '2024-01-01',
-                'class' => 'X',
+                'class' => '10',
                 'photo' => 'default.png',
             ],
             [
@@ -27,7 +27,7 @@ class ChildSeeder extends Seeder
                 'name' => 'Jack',
                 'school' => 'Yos Sudarso',
                 'bod' => '2024-01-01',
-                'class' => 'X',
+                'class' => '10',
                 'photo' => 'default.png',
             ],
             [
@@ -35,28 +35,28 @@ class ChildSeeder extends Seeder
                 'name' => 'John',
                 'school' => 'Yos Sudarso',
                 'bod' => '2024-01-01',
-                'class' => 'X',
+                'class' => '10',
             ],
             [
                 'user_id' => 3,
                 'name' => 'Tretan',
                 'school' => 'Yos Sudarso',
                 'bod' => '2024-01-01',
-                'class' => 'X',
+                'class' => '10',
             ],
             [
                 'user_id' => 4,
                 'name' => 'Rizki',
                 'school' => 'Yos Sudarso',
                 'bod' => '2024-01-01',
-                'class' => 'X',
+                'class' => '10',
             ],
             [
                 'user_id' => 4,
                 'name' => 'Prazz',
                 'school' => 'Yos Sudarso',
                 'bod' => '2024-01-01',
-                'class' => 'X',
+                'class' => '10',
             ]
         ];
         foreach ($childs as $child) {

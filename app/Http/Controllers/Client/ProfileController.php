@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Child;
+use App\Rules\ClassRange;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -45,7 +46,7 @@ class ProfileController extends Controller
             'name.*' => 'required|string|max:255',
             'school.*' => 'required|string|max:255',
             'bod.*' => 'required|date',
-            'class.*' => 'required|string|max:255',
+            'class.*' => ['required', 'string', 'max:255', new ClassRange],
         ]);
     
         // Iterate over the input arrays and create Child records
