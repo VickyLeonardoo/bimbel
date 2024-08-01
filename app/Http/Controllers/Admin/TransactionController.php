@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
+use App\Models\Course;
+use App\Models\Attendance;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,27 +51,52 @@ class TransactionController extends Controller
         return redirect()->route('admin.transaction', $id)->with('success','Application Cancelled Successfully');
     }
 
-    public function setPaymentReceive($id)
-    {
-        $order = Order::findOrFail($id);
-        $order->status = 'payment_received'; 
-        $order->save();
+    public function setPaymentReceive($id){
+    $order = Order::findOrFail($id);
 
-        // Pastikan relasi orderItems sudah ada dan didefinisikan di model Order
-        foreach ($order->orderItems as $item) {
-            $data = [
-                'order_id' => $id,
-                'course_id' => $item->course_id,
-                'year_id' => $order->year_id, // Pastikan year_id ada di orderItems jika diperlukan
-                'child_id' => $item->child_id, // Mengambil child_id dari orderItems
-                'status' => 'approved'
+    foreach ($order->orderItems as $item) {
+        $orderFind = $item->course->sessions;
+        if ($orderFind->isEmpty()) {
+            return redirect()->back()->with('error','No data session found, get session data first!');
+        }
+    }
+
+    $order->status = 'payment_received'; 
+    $order->save();
+
+    // Pastikan relasi orderItems sudah ada dan didefinisikan di model Order
+    foreach ($order->orderItems as $item) {
+        
+        $data = [
+            'order_id' => $id,
+            'course_id' => $item->course_id,
+            'year_id' => $order->year_id, // Pastikan year_id ada di orderItems jika diperlukan
+            'child_id' => $item->child_id, // Mengambil child_id dari orderItems
+            'status' => 'approved'
+        ];
+
+        // Simpan data enrollment
+        Enrollment::create($data);
+
+        // Ambil sesi dari kursus
+        $sessions = Course::find($item->course_id)->sessions;
+
+        foreach ($sessions as $session) {
+            // Siapkan data untuk attendance
+            $attendanceData = [
+                'child_id' => $item->child_id,
+                'session_id' => $session->id,
+                'status' => null, // Status dapat diset sesuai kebutuhan
+                'is_active' => true
             ];
 
-            // Simpan data enrollment
-            Enrollment::create($data);
+            // Simpan data attendance
+            Attendance::create($attendanceData);
         }
-        return redirect()->route('admin.transaction')->with('success','Payment Received Successfully');
     }
+
+    return redirect()->route('admin.transaction')->with('success', 'Payment Received Successfully');
+}
 
 
     public function setArchive($id){

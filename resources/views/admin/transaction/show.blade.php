@@ -4,18 +4,26 @@
         <div class="col-12 col-lg-12">
             <div class="row">
                 <div class="col-md-8">
+                    @if (session('error'))
+                        <div class="alert alert-light-danger alert-dismissible show fade">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="card mb-5">
                         <div class="card-header d-flex justify-content-between">
                             <div>
                                 @if ($order->status == 'confirmed')
-                                    <a href="{{ route('admin.transaction.set.payment.receive',$order->id) }}" class="btn btn-outline-success">Payment Received</a>
+                                    <a href="{{ route('admin.transaction.set.payment.receive', $order->id) }}"
+                                        class="btn btn-outline-success">Payment Received</a>
                                 @endif
                                 @if (in_array($order->status, ['draft', 'confirmed']))
-                                    <a href="{{ route('admin.transaction.set.cancel',$order->id) }}" class="btn btn-outline-danger">Cancel</a>
+                                    <a href="{{ route('admin.transaction.set.cancel', $order->id) }}"
+                                        class="btn btn-outline-danger">Cancel</a>
                                 @endif
                             </div>
-                            <a href="{{ route('admin.transaction.set.archive',$order->id) }}" class="btn btn-primary ms-auto"><i
-                                    class="fa-solid fa-box-archive"></i>Archive</a>
+                            <a href="{{ route('admin.transaction.set.archive', $order->id) }}"
+                                class="btn btn-primary ms-auto"><i class="fa-solid fa-box-archive"></i>Archive</a>
                         </div>
                         <div class="card-body">
                             <div class="row">

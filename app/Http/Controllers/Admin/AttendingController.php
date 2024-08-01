@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Year;
 use App\Models\Course;
+use App\Models\Attendance;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Attendance;
 
 class AttendingController extends Controller
 {
@@ -39,10 +40,26 @@ class AttendingController extends Controller
             'years' => Year::all(),
             'course' => $course,
             'selected_year' => $year_id,
-            'attendees' => Attendance::where('session_id', $request->get('session_id'))->get(),
+            'attendees' => Attendance::where('session_id', $request->get('session_id'))->with('child')->get(),
             'selected_session' => $ses_id,
         ]);
     }
+
+    public function updateStatus(Request $request)
+{
+    $ids = $request->input('ids');
+    $status = $request->input('status');
+    $reason = $request->input('reason', ''); // Default to empty string if not provided
+
+    DB::table('attendances')
+        ->whereIn('id', $ids)
+        ->update([
+            'status' => $status,
+            'reason' => $status === 'permission' ? $reason : null // Only update reason if status is 'permission'
+        ]);
+
+    return response()->json(['success' => true]);
+}
 
 
 }

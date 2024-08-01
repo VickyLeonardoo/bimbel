@@ -114,7 +114,7 @@ Route::group(['middleware' => ['auth:user']],function(){
         Route::controller(AttendingController::class)->group(function(){
             Route::get('/attending', 'index')->name('admin.attending');
             Route::get('/attending/{slug}/show', 'show')->name('admin.attending.show');
-            Route::get('/attending/{id}/update-status', 'updateStatus')->name('admin.attending.update.status');
+            Route::post('/attending/update-status', 'updateStatus')->name('admin.attending.update.status');
         });
 
 
