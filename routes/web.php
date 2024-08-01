@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminEnrollmentController;
 use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\VisionMissionController;
 
@@ -55,6 +56,11 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/course/delete/{id}', 'delete')->name('admin.course.delete');
         });
 
+        Route::controller(SessionController::class)->group(function(){
+            Route::get('/course/{slug}/session', 'index')->name('admin.course.session');
+            Route::get('/course/{slug}/get-session', 'store')->name('admin.course.get.session');
+        });
+
         Route::controller(InstructorController::class)->group(function(){
             Route::get('/instructor', 'index')->name('admin.instructor');
             Route::get('/instructor/create', 'create')->name('admin.instructor.create');
@@ -87,6 +93,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/year/update/{id}', 'update')->name('admin.year.update');
             Route::get('/year/delete/{id}', 'delete')->name('admin.year.delete');
             Route::get('/year/update/status/{id}', 'updateStatus')->name('admin.year.update.status');
+            Route::get('/year/update/publish/{id}', 'updatePublished')->name('admin.year.update.publish');
         });
 
         Route::controller(TransactionController::class)->group(function(){

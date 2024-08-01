@@ -30,8 +30,9 @@
                                             <td>Rp. {{ $course->price }}</td>
                                             <td>{{ $course->description }}</td>
                                             <td>
-                                                <a href="{{route('admin.course.edit',$course->slug)}}" class="btn btn-sm bg-primary text-white">EDIT</a>
-                                                <a href="{{route('admin.course.delete',$course->id)}}" class="btn btn-sm bg-danger text-white">DELETE</a>
+                                                <a href="{{route('admin.course.edit',$course->slug)}}" class="btn btn-sm bg-primary text-white">Edit</a>
+                                                <a href="{{route('admin.course.delete',$course->id)}}" class="btn btn-sm bg-danger text-white">Delete</a>
+                                                <a href="{{route('admin.course.session',$course->slug)}}" class="btn btn-sm bg-success text-white">Session</a>
                                             </td>
                                         </tr>
                                     @endforeach

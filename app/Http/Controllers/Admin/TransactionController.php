@@ -79,5 +79,10 @@ class TransactionController extends Controller
         return redirect()->route('admin.transaction', $id)->with('success','Application Archived Successfully');
     }
 
+
+    public function storeSession(){
+        
+    }
+
     
 }

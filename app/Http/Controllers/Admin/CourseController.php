@@ -30,6 +30,7 @@ class CourseController extends Controller
             'price' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'session' => 'required',
         ]);
         $image = $request->file('image');
         $hashName = $image->hashName();
@@ -51,7 +52,9 @@ class CourseController extends Controller
             'description' => $request->description,
             'image' => $hashName,
             'slug' => $slug,
+            'session' => $request->session,
         ];
+
         
         Course::create($data);
         return redirect()->route('admin.course')->with('success','Course Created Successfully');
@@ -70,6 +73,7 @@ class CourseController extends Controller
             'code' => 'required',
             'price' => 'required',
             'description' => 'required',
+            'session' => 'required',
         ]);
         $course = Course::find($id);
 
@@ -79,6 +83,7 @@ class CourseController extends Controller
             'price' => $request->price,
             'description' => $request->description,
             'slug' => Str::of($request->name)->slug('-'),
+            'session' => $request->session,
         ];
         if($request->hasFile('image')){
             $image = $request->file('image');

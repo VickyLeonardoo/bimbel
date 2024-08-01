@@ -28,6 +28,11 @@ class YearController extends Controller
             'end_date' => 'required',
         ]);
 
+        $findDateRange = Year::where('start_date','<',$request->end_date)->where('end_date','>', $request->start_date)->first();
+        if ($findDateRange) {
+            return redirect()->back()->with('error','You cant set 2 years at the same time.');
+        }
+
         Year::create([
             'name' => $request->name,
             'start_date' => $request->start_date,
@@ -71,10 +76,30 @@ class YearController extends Controller
                 'status' => 'inactive',
             ]);
         }else{
+            $findActive = Year::where('status','active')->first();
+            if ($findActive) {
+                return redirect()->back()->with('error','You cant set Active on 2 years at the same time.');
+            }else{
+                $year->update([
+                    'status' => 'active',
+                ]);
+            }
+        }
+        return redirect()->route('admin.year')->with('success','Years Registration successfully updated.');
+    }
+
+    public function updatePublished($id){
+        $year = Year::find($id);
+        if ($year->is_published == true) {
             $year->update([
-                'status' => 'active',
+                'is_published' => false,
+            ]);
+        }else{
+            $year->update([
+                'is_published' => true,
             ]);
         }
         return redirect()->route('admin.year')->with('success','Years Registration successfully updated.');
+
     }
 }

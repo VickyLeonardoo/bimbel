@@ -22,6 +22,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="">Session</label>
+                                <input type="number" class="form-control" name="session" value="{{ old('session') }}">
+                                @error('session')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="">Price</label>
                                 <input type="number" class="form-control" name="price" value="{{ old('price') }}">
                                 @error('price')

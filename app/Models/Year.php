@@ -11,4 +11,9 @@ class Year extends Model
 
     protected $guarded = ['id'];
 
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
+
 }

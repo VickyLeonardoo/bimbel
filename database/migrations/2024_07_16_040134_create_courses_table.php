@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->integer('price');
             $table->text('description');
-            $table->integer('sesi');
+            $table->integer('session');
             $table->text('image');
             $table->string('slug')->unique();
             $table->boolean('active')->default(true);

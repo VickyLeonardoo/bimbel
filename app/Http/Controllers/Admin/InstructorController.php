@@ -15,7 +15,7 @@ class InstructorController extends Controller
     public function index(){
         return view('admin.instructor.index',[
             'title' => 'Instructor List',
-            'instructors' => Instructor::all(),
+            'instructors' => Instructor::with(['educationDetails','courses'])->get(),
         ]);
     }
 

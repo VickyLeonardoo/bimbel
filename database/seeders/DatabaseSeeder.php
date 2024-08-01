@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
         ChildSeeder::class,
         YearSeeder::class,
         OrderSeeder::class,
+        InstructorSeeder::class,
+        EducationDetailSeeder::class,
+        InstructorCourseSeeder::class,
     ]);
         
     }

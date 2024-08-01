@@ -3,6 +3,12 @@
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
+                @if (session('error'))
+                    <div class="alert alert-light-danger alert-dismissible show fade">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div> 
+                @endif
                 <div class="card">
                     <div class="card-body">
                         <form action="{{ route('admin.year.store') }}" method="POST" enctype="multipart/form-data">

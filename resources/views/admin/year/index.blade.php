@@ -3,6 +3,12 @@
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
+                @if (session('error'))
+                    <div class="alert alert-light-danger alert-dismissible show fade">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div> 
+                @endif
                 <div class="card">
                     <div class="card-header text-end">
                         <a href="{{ route('admin.year.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
@@ -18,6 +24,7 @@
                                         <th>Reg Start Date</th>
                                         <th>Reg End Date</th>
                                         <th>Status</th>
+                                        <th>Publish</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -33,6 +40,13 @@
                                                     <a href="{{route('admin.year.update.status',$year->id)}}" class="badge badge-sm bg-success">Active</a>
                                                 @else
                                                     <a href="{{route('admin.year.update.status',$year->id)}}" class="badge badge-sm bg-danger">Inactive</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($year->is_published == true)
+                                                    <a href="{{route('admin.year.update.publish',$year->id)}}" class="badge badge-sm bg-success">Yes</a>
+                                                @else
+                                                    <a href="{{route('admin.year.update.publish',$year->id)}}" class="badge badge-sm bg-danger">No</a>
                                                 @endif
                                             </td>
                                             <td>

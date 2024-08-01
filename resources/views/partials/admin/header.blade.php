@@ -39,7 +39,7 @@
 </head>
 
 <body>
-    <script src="assets/static/js/initTheme.js"></script>
+    {{-- <script src="assets/static/js/initTheme.js"></script> --}}
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-wrapper active">
@@ -112,7 +112,6 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="./assets/compiled/jpg/1.jpg">
                                             </div>
                                         </div>
                                     </div>

@@ -29,8 +29,6 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/client/delete_children/{id}', 'deleteChildren')->name('client.delete_children');
         });
 
-        
-
         Route::controller(TransactionController::class)->group(function(){
             Route::get('/client/transaction', 'index')->name('client.transaction');
             Route::get('/client/transaction/create', 'create')->name('client.transaction.create');
@@ -40,9 +38,6 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/client/transaction/{id}/update', 'update')->name('client.transaction.update');
             Route::get('/client/transaction/{id}/upload', 'viewUpload')->name('client.transaction.page.upload');
             Route::post('/client/transaction/{id}/upload', 'upload')->name('client.transaction.upload');
-
-
-            
         });
 
         Route::controller(OrderController::class)->group(function(){

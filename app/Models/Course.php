@@ -16,11 +16,18 @@ class Course extends Model
         'code',
         'price',
         'slug',
+        'session',
+        'active',
     ];
 
     public function instructors()
     {
         return $this->belongsToMany(Instructor::class, 'instructor_courses');
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
     }
 
 
