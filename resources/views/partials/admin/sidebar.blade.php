@@ -51,8 +51,8 @@
             </a>
         </li>
         <li class="sidebar-title">Bimbel BUC Teva</li>
-        <li class="sidebar-item">
-            <a href="" class='sidebar-link '>
+        <li class="sidebar-item {{ Route::is('admin.attending*') ? 'active':'' }}">
+            <a href="{{ route('admin.attending') }}" class='sidebar-link '>
                 <i class="bi bi-file-earmark-medical-fill"></i>
                 <span>Attending</span>
             </a>

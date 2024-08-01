@@ -12,7 +12,7 @@ class SessionController extends Controller
 {
     //
     public function index(Request $request, $slug)
-{
+    {
     // Ambil tahun aktif sebagai default
     $activeYear = Year::where('status', 'active')->firstOrFail();
     $year_id = $request->get('year_id', $activeYear->id);
@@ -24,21 +24,21 @@ class SessionController extends Controller
                     ->where('slug', $slug)
                     ->firstOrFail();
 
-    return view('admin.session.index', [
-        'title' => 'Session List',
-        'sessions' => $course->sessions,
-        'years' => Year::all(),
-        'course' => $course,
-        'selected_year' => $year_id,
-    ]);
-}
+        return view('admin.session.index', [
+            'title' => 'Session List',
+            'sessions' => $course->sessions,
+            'years' => Year::all(),
+            'course' => $course,
+            'selected_year' => $year_id,
+        ]);
+    }
 
-    public function store($slug){
+    public function store(Request $request, $slug){
+        $year_id = $request->query('year');
         $course = Course::where('slug', $slug)->first();
         $totalSession = $course->session;
 
-        $sessionCheck = Session::where('course_id',$course->id)->where('year_id',Year::where('status','active')->first()->id)->first();
-        return $sessionCheck;
+        $sessionCheck = Session::where('course_id',$course->id)->where('year_id', $year_id)->first();
         if ($sessionCheck) {
             return redirect()->back()->with('error','Session Already Created');
         }
@@ -47,7 +47,7 @@ class SessionController extends Controller
             $data = [
                 'name' => 'Session ' . $i,
                 'course_id' => $course->id,
-                'year_id' => Year::where('status','active')->first()->id,
+                'year_id' => $year_id,
             ];
             Session::create($data);
         }

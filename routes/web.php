@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\Auth\AuthController;
 
+use App\Http\Controllers\Admin\AttendingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -109,6 +110,14 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/enrollment/{course_id}/', 'show')->name('admin.enrollment.show');
             Route::get('/enrollment/{id}/update-status', 'updateStatus')->name('admin.enrollment.update.status');
         });
+
+        Route::controller(AttendingController::class)->group(function(){
+            Route::get('/attending', 'index')->name('admin.attending');
+            Route::get('/attending/{slug}/show', 'show')->name('admin.attending.show');
+            Route::get('/attending/{id}/update-status', 'updateStatus')->name('admin.attending.update.status');
+        });
+
+
 
     });
 });

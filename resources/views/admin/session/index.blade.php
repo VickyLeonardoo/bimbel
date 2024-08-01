@@ -1,7 +1,7 @@
 @extends('partials.admin.header')
 @section('content')
     <section class="row">
-        <div class="col-12 col-lg-12">
+        <div class="col-12 col-lg-12"> 
             <div class="row">
                 @if (session('error'))
                     <div class="alert alert-light-danger alert-dismissible show fade">
@@ -20,7 +20,10 @@
                             </select>
                             <button class="btn btn-secondary me-5" id="searchButton"><i class="fas fa-search"></i></button>
                         </div>
-                        <a href="{{ route('admin.course.get.session', $course->slug) }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Get Session</a>
+                        
+                        <a href="#" id="getSessionButton" class="btn btn-sm btn-primary">
+                            <i class="fas fa-plus"></i> Get Session
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -68,5 +71,14 @@
             alert('Please select a year.');
         }
     });
+
+    document.getElementById('getSessionButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah default action dari anchor tag
+        var selectedYear = document.getElementById('yearDropdown').value;
+        var baseUrl = '{{ route('admin.course.get.session', $course->slug) }}';
+        var newUrl = baseUrl + (selectedYear ? '?year=' + selectedYear : '');
+        window.location.href = newUrl; // Redirect ke URL baru dengan parameter year
+    });
+
 </script>
 @endsection
