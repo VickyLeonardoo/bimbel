@@ -64,8 +64,23 @@ class YearController extends Controller
     }
 
     public function delete($id){
-        Year::find($id)->delete();
-        return redirect()->route('admin.year')->with('success','Years Registration successfully deleted.');
+        try {
+            $year = Year::find($id);
+            if ($year) {
+                // Attempt to delete the year
+                $year->delete();
+                return redirect()->route('admin.year')->with('success', 'Year registration successfully deleted.');
+            } else {
+                return redirect()->route('admin.year')->with('error', 'Year not found.');
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Check if the exception is a foreign key constraint violation
+            if ($e->getCode() == '23000') {
+                return redirect()->back()->with('error', 'You cannot delete the year because it is related to another field.');
+            }
+            // Rethrow the exception if it is not a foreign key constraint violation
+            throw $e;
+        }
     }
 
     public function updateStatus($id){

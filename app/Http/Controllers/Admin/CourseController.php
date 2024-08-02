@@ -96,9 +96,26 @@ class CourseController extends Controller
     }
 
     public function delete($id){
-        $course = Course::find($id);
-        $course->delete();
-        unlink(public_path('storage/course/'.$course->image));
-        return redirect()->route('admin.course')->with('success','Course Deleted Successfully');
+        try {
+            $course = Course::find($id);
+            if ($course) {
+                // Attempt to delete the course
+                $course->delete();
+                // Delete the course image if deletion is successful
+                if ($course->image && file_exists(public_path('storage/course/'.$course->image))) {
+                    unlink(public_path('storage/course/'.$course->image));
+                }
+                return redirect()->route('admin.course')->with('success', 'Course Deleted Successfully');
+            } else {
+                return redirect()->route('admin.course')->with('error', 'Course Not Found');
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Check if the exception is a foreign key constraint violation
+            if ($e->getCode() == '23000') {
+                return redirect()->back()->with('error', 'You cannot delete the course because it is related to another field');
+            }
+            // Rethrow the exception if it is not a foreign key constraint violation
+            throw $e;
+        }
     }
 }

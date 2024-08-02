@@ -125,11 +125,27 @@ class InstructorController extends Controller
     }
 
     public function delete($id){
-        if(Instructor::where('id', $id)->first()->image){
-            unlink(storage_path('app/public/instructor/'.Instructor::where('id', $id)->first()->image));
+        try {
+            $instructor = Instructor::find($id);
+            if ($instructor) {
+                // Check and delete the instructor's image
+                if ($instructor->image && file_exists(storage_path('app/public/instructor/' . $instructor->image))) {
+                    unlink(storage_path('app/public/instructor/' . $instructor->image));
+                }
+                // Attempt to delete the instructor
+                $instructor->delete();
+                return redirect()->route('admin.instructor')->with('success', 'Instructor successfully deleted');
+            } else {
+                return redirect()->route('admin.instructor')->with('error', 'Instructor not found');
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Check if the exception is a foreign key constraint violation
+            if ($e->getCode() == '23000') {
+                return redirect()->back()->with('error', 'You cannot delete the instructor because it is related to another field');
+            }
+            // Rethrow the exception if it is not a foreign key constraint violation
+            throw $e;
         }
-        Instructor::where('id', $id)->delete();
-        return redirect()->route('admin.instructor')->with('success', 'Instructor successfully deleted');
     }
 
     public function editAddEducation($id, Request $request){

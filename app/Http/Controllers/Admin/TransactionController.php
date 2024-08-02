@@ -72,7 +72,8 @@ class TransactionController extends Controller
             'course_id' => $item->course_id,
             'year_id' => $order->year_id, // Pastikan year_id ada di orderItems jika diperlukan
             'child_id' => $item->child_id, // Mengambil child_id dari orderItems
-            'status' => 'approved'
+            'status' => 'approved',
+            'class' => $item->child->class,
         ];
 
         // Simpan data enrollment
@@ -88,6 +89,7 @@ class TransactionController extends Controller
                 'session_id' => $session->id,
                 'status' => null, // Status dapat diset sesuai kebutuhan
                 'year_id' => $order->year_id,
+                'class' => $item->child->class,
             ];
 
             // Simpan data attendance

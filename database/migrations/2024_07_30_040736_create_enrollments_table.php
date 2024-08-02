@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('year_id')->references('id')->on('years')->onDelete('cascade');
             $table->foreignId('child_id')->references('id')->on('children');
             $table->enum('status',['approved','rejected']);
+            $table->string('class');
             $table->timestamps();
         });
     }

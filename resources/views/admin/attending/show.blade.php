@@ -3,7 +3,7 @@
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
-                @if (session('error'))
+                @if (session('error')) 
                     <div class="alert alert-light-danger alert-dismissible show fade">
                         {{ session('error') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -27,6 +27,14 @@
                                 @foreach ($course->sessions as $session)
                                     <option value="{{ $session->id }}"
                                         {{ $session->id == $selected_session ? 'selected' : '' }}>{{ $session->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <select class="form-select me-2 form-control" id="classDropdown">
+                                <option disabled selected>Select Class</option>
+                                @foreach ($classes as $class)
+                                    <option value="{{ $class }}"
+                                       {{ $class == $selected_class ? 'selected' : '' }} >{{ $class }}
                                     </option>
                                 @endforeach
                             </select>
@@ -96,6 +104,7 @@
         function updateUrl() {
             const selectedYear = document.getElementById('yearDropdown').value;
             const selectedSession = document.getElementById('sessionDropdown').value;
+            const selectedClass = document.getElementById('classDropdown').value;
             const url = new URL(window.location.href);
 
             if (selectedYear) {
@@ -106,11 +115,16 @@
                 url.searchParams.set('session_id', selectedSession);
             }
 
+            if (selectedClass) {
+                url.searchParams.set('class', selectedClass);
+            }
+
             window.location.href = url.toString();
         }
 
         document.getElementById('yearDropdown').addEventListener('change', updateUrl);
         document.getElementById('sessionDropdown').addEventListener('change', updateUrl);
+        document.getElementById('classDropdown').addEventListener('change', updateUrl);
 
         document.getElementById('selectAll').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('.checkbox-item');

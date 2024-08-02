@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('year_id')->references('id')->on('years');
             $table->boolean('is_active')->default(true);
             $table->text('reason')->nullable();
+            $table->string('class');
             $table->timestamps();
         });
     }

@@ -115,6 +115,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/attending', 'index')->name('admin.attending');
             Route::get('/attending/{slug}/show', 'show')->name('admin.attending.show');
             Route::post('/attending/update-status', 'updateStatus')->name('admin.attending.update.status');
+            Route::get('/attending/{slug}/report', 'showReport')->name('admin.attending.report');
         });
 
 
