@@ -87,7 +87,7 @@ class TransactionController extends Controller
                 'child_id' => $item->child_id,
                 'session_id' => $session->id,
                 'status' => null, // Status dapat diset sesuai kebutuhan
-                'is_active' => true
+                'year_id' => $order->year_id,
             ];
 
             // Simpan data attendance
@@ -101,7 +101,12 @@ class TransactionController extends Controller
 
     public function setArchive($id){
         $order = Order::findOrFail($id);
-        $order->is_active = false;
+        if ($order->is_active == true) {
+            $order->is_active = false;
+        }else{
+            $order->is_active = true;
+
+        }
         $order->save();
         return redirect()->route('admin.transaction', $id)->with('success','Application Archived Successfully');
     }

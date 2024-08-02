@@ -22,8 +22,12 @@
                                         class="btn btn-outline-danger">Cancel</a>
                                 @endif
                             </div>
-                            <a href="{{ route('admin.transaction.set.archive', $order->id) }}"
-                                class="btn btn-primary ms-auto"><i class="fa-solid fa-box-archive"></i>Archive</a>
+                            @if ($order->is_active == true)
+                            <a href="{{ route('admin.transaction.set.archive', $order->id) }}" class="btn btn-primary ms-auto"><i class="fa-solid fa-box-archive"></i>Archive</a>
+                            @else
+                            <a href="{{ route('admin.transaction.set.archive', $order->id) }}" class="btn btn-primary ms-auto"><i class="fa-solid fa-box-archive"></i>Unarchive</a>
+                                
+                            @endif
                         </div>
                         <div class="card-body">
                             <div class="row">

@@ -35,31 +35,28 @@ class AttendingController extends Controller
                     ->firstOrFail();
 
         return view('admin.attending.show', [
-            'title' => 'Session List',
+            'title' => 'Attendee List',
             'sessions' => $course->sessions,
             'years' => Year::all(),
             'course' => $course,
             'selected_year' => $year_id,
-            'attendees' => Attendance::where('session_id', $request->get('session_id'))->with('child')->get(),
+            'attendees' => Attendance::where('session_id', $request->get('session_id'))->where('year_id', $year_id)->with('child')->get(),
             'selected_session' => $ses_id,
         ]);
     }
 
-    public function updateStatus(Request $request)
-{
-    $ids = $request->input('ids');
-    $status = $request->input('status');
-    $reason = $request->input('reason', ''); // Default to empty string if not provided
+    public function updateStatus(Request $request){
+        $ids = $request->input('ids');
+        $status = $request->input('status');
+        $reason = $request->input('reason', ''); // Default to empty string if not provided
 
-    DB::table('attendances')
-        ->whereIn('id', $ids)
-        ->update([
-            'status' => $status,
-            'reason' => $status === 'permission' ? $reason : null // Only update reason if status is 'permission'
-        ]);
+        DB::table('attendances')
+            ->whereIn('id', $ids)
+            ->update([
+                'status' => $status,
+                'reason' => $status === 'permission' ? $reason : null // Only update reason if status is 'permission'
+            ]);
 
-    return response()->json(['success' => true]);
-}
-
-
+        return response()->json(['success' => true]);
+    }
 }

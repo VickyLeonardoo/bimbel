@@ -37,15 +37,23 @@ class EnrollmentController extends Controller
     }
 
     public function show($course_id){
-        return view('admin.enrollment.show',[
+        $year_id = request('year_id');
+        $query = Enrollment::where('course_id', $course_id);
+
+        if ($year_id) {
+            $query->where('year_id', $year_id);
+        }
+
+        $enrollments = $query->get();
+
+        return view('admin.enrollment.show', [
             'title' => 'Enrollment Detail',
             'course' => Course::find($course_id),
             'years' => Year::all(),
-            'enrollments' => Enrollment::where('course_id', $course_id)->get(),
-            'participant' => Enrollment::where('course_id', $course_id)->where('status', 'approved')->count(),
-            // 'instructor' => InstructorCourse::where('course_id', $course_id)->get(),
+            'enrollments' => $enrollments,
         ]);
     }
+
 
     public function updateStatus($id){
         $enrollment = Enrollment::findOrFail($id);
