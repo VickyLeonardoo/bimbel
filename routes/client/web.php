@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\Client\HomeController;
-use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\OrderController;
+use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\TransactionController;
 
 Route::controller(HomeController::class)->group(function(){
@@ -45,6 +46,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/order/{id}', 'show')->name('pelanggan.order.show');
         });
 
-        
+        Route::post('/check-discount', [DiscountController::class, 'checkDiscount'])->name('check.discount');
+
     });
 });

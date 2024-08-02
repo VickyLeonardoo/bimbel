@@ -21,7 +21,7 @@
                                             <td>{{ $course->name }}</td>
                                             <td>
                                                 <a href="{{ route('admin.attending.show', $course->slug) }}" class="badge bg-primary">Attendee</a>
-                                                <a href="{{ route('admin.attending.report', $course->slug) }}" class="badge bg-primary">Report</a>
+                                                <a href="{{ route('admin.attending.report', $course->slug) }}" class="badge bg-secondary">Report</a>
                                             </td>
                                         </tr>
                                     @endforeach

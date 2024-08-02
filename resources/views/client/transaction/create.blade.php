@@ -63,6 +63,12 @@
                                 </select>
                             </div>
                             <div class="form-group mb-3">
+                                <label for="">Discount Code</label>
+                                <input type="text" name="discount_code" id="discount_code" class="form-control">
+                                <small id="discount_message" class="text-success"></small>
+                                <small id="discount_error" class="text-danger"></small>
+                            </div>
+                            <div class="form-group mb-3">
                                 <label for="">Total</label>
                                 <input type="text" name="total" id="total" class="form-control" value=""
                                     readonly>
@@ -92,11 +98,47 @@
                 multiple: true,
             });
 
-            function calculateTotal() {
-                const courseSelect = document.getElementById('course-select');
-                const childSelect = document.getElementById('child-select');
-                const totalInput = document.getElementById('total');
+            const courseSelect = document.getElementById('course-select');
+            const childSelect = document.getElementById('child-select');
+            const totalInput = document.getElementById('total');
+            const discountCodeInput = document.getElementById('discount_code');
+            const discountMessage = document.getElementById('discount_message');
+            const discountError = document.getElementById('discount_error');
 
+            async function checkDiscountCode(code, total) {
+                const response = await fetch('{{ route('check.discount') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        code
+                    })
+                });
+
+                const data = await response.json();
+                if (data.status === 'valid') {
+                    const discount = data.discount;
+                    let discountAmount = 0;
+                    if (discount.type === 'percent') {
+                        discountAmount = total * discount.total / 100;
+                        total -= discountAmount;
+                    } else if (discount.type === 'value') {
+                        discountAmount = discount.total;
+                        total -= discountAmount;
+                    }
+                    discountMessage.textContent = `Discount found, you get a discount of ${discountAmount}`;
+                    return total;
+                } else {
+                    discountError.textContent = 'Invalid discount code';
+                    return total;
+                }
+            }
+
+            function calculateTotal() {
+                discountError.textContent = ''; // Clear any previous error message
+                discountMessage.textContent = ''; // Clear any previous discount message
                 const selectedCourses = Array.from(courseSelect.selectedOptions);
                 const selectedChildren = Array.from(childSelect.selectedOptions);
 
@@ -106,13 +148,25 @@
                 });
 
                 const numChildren = selectedChildren.length;
+                let total = numChildren * totalCoursePrice;
 
-                const total = numChildren * totalCoursePrice;
-                totalInput.value = total;
+                // Apply discount if available
+                const discountCode = discountCodeInput.value;
+                if (discountCode) {
+                    checkDiscountCode(discountCode, total).then(discountedTotal => {
+                        totalInput.value = discountedTotal;
+                    });
+                } else {
+                    totalInput.value = total;
+                }
             }
 
             $('#child-select').on('change', calculateTotal);
             $('#course-select').on('change', calculateTotal);
+            $('#discount_code').on('input', calculateTotal);
+
+            // Initial calculation
+            calculateTotal();
         });
     </script>
 @endsection
