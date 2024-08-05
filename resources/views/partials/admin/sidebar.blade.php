@@ -37,6 +37,12 @@
                 <span>Year</span>
             </a>
         </li>
+        <li class="sidebar-item {{Route::is('admin.discount*') ? 'active':''}}">
+            <a href="{{route('admin.discount')}}" class='sidebar-link '>
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                <span>Discount</span>
+            </a>
+        </li>
         <li class="sidebar-title">Application</li>
         <li class="sidebar-item {{ Route::is('admin.transaction*') ? 'active':'' }}">
             <a href="{{ route('admin.transaction') }}" class='sidebar-link '>

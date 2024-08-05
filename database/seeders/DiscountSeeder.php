@@ -15,7 +15,8 @@ class DiscountSeeder extends Seeder
     public function run(): void
     {
         $now = Carbon::now();
-        $dateNext = $now->addDays(10);
+        $dateNext = $now->copy()->addDays(10); // Menggunakan copy() agar $now tidak berubah
+        $dateBefore = $now->copy()->subDays(10); // Menggunakan copy() agar $now tidak berubah
 
         $discount = [
             [
@@ -33,9 +34,17 @@ class DiscountSeeder extends Seeder
                 'type' => 'value',
                 'status' => true,
                 'date_valid' => $dateNext,
+            ],
+            [
+                'name' => 'Diskon Ajaran Baru',
+                'code' => 'diskon23',
+                'total' => 200000,
+                'type' => 'value',
+                'status' => true,
+                'date_valid' => $dateBefore,
             ]
-
         ];
+
         DB::table('discounts')->insert($discount);
     }
 }

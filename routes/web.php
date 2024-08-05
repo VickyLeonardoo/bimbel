@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\VisionMissionController;
+use App\Http\Controllers\DiscountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +117,16 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/attending/{slug}/show', 'show')->name('admin.attending.show');
             Route::post('/attending/update-status', 'updateStatus')->name('admin.attending.update.status');
             Route::get('/attending/{slug}/report', 'showReport')->name('admin.attending.report');
+        });
+
+        Route::controller(DiscountController::class)->group(function(){
+            Route::get('/discount', 'index')->name('admin.discount');
+            Route::get('/discount/create', 'create')->name('admin.discount.create');
+            Route::post('/discount/store', 'store')->name('admin.discount.store');
+            Route::get('/discount/edit/{id}', 'edit')->name('admin.discount.edit');
+            Route::post('/discount/update/{id}', 'update')->name('admin.discount.update');
+            Route::get('/discount/update/{id}', 'updateStatus')->name('admin.discount.update');
+            Route::get('/discount/delete/{id}', 'delete')->name('admin.discount.delete');
         });
 
 
