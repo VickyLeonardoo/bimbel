@@ -51,6 +51,8 @@ class TransactionController extends Controller
             'total' => 'required|numeric',
         ]);
 
+        return $request->all();
+
         $nowYear = date('Y');
         $getRegNoLast = Order::where('user_id', auth()->user()->id)->latest()->first();
         if (!$getRegNoLast) {

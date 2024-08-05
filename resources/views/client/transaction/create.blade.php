@@ -118,8 +118,17 @@
                 });
 
                 const data = await response.json();
+                const currentDate = new Date();
+
                 if (data.status === 'valid') {
                     const discount = data.discount;
+                    const discountDateValid = new Date(discount.date_valid);
+
+                    if (currentDate > discountDateValid) {
+                        discountError.textContent = 'Discount code has expired';
+                        return total;
+                    }
+
                     let discountAmount = 0;
                     if (discount.type === 'percent') {
                         discountAmount = total * discount.total / 100;
