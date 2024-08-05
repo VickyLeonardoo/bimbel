@@ -137,10 +137,34 @@
                                             <tr>
                                                 <td colspan="3"></td>
                                                 <td class="Rate">
-                                                    <h6 class="mb-0 p-2">Total</h6>
+                                                    <h6 class="mb-0 p-2">Subtotal</h6>
                                                 </td>
                                                 <td class="payment digits">
                                                     <h6 class="mb-0 p-2">@currency($total)</h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                                <td class="Rate">
+                                                    <h6 class="mb-0 p-2">Discount : 
+                                                        @if ($order->use_disc == true)
+                                                            <span class="badge bg-success mb-0 p-2">{{ $order->discount->code }}</span>
+                                                        @endif
+                                                    </h6>
+                                                    
+                                                </td>
+                                                <td class="payment digits">
+                                                    <h6 class="mb-0 p-2">@currency($order->discount_amount)</h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                                <td class="Rate">
+                                                    <h6 class="mb-0 p-2">Total</h6>
+                                                    
+                                                </td>
+                                                <td class="payment digits">
+                                                    <h6 class="mb-0 p-2">@currency($order->total)</h6>
                                                 </td>
                                             </tr>
                                         </tfoot>

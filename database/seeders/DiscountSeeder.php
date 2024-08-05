@@ -20,10 +20,10 @@ class DiscountSeeder extends Seeder
         $discount = [
             [
                 'name' => 'Diskon Ajaran Baru',
-                'code' => 'diskon22',
+                'code' => 'diskon21',
                 'total' => 20,
                 'type' => 'percent',
-                'status' => true,
+                'status' => false,
                 'date_valid' => $dateNext,
             ],
             [

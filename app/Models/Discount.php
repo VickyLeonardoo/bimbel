@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Discount extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
 }

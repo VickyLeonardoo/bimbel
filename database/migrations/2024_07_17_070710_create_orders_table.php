@@ -20,6 +20,9 @@ return new class extends Migration
             $table->float('total',15,2);
             $table->enum('status',['draft','confirmed','payment_received','cancelled']);
             $table->text('payment_image')->nullable();
+            $table->foreignId('discount_id')->nullable()->constrained();
+            $table->boolean('use_disc');
+            $table->float('discount_amount',15,2);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

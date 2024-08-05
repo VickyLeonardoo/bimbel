@@ -31,6 +31,10 @@ class Order extends Model
         return $this->belongsToMany(Child::class, 'order_items');
     }
 
+    public function discount(){
+        return $this->belongsTo(Discount::class);
+    }
+
     
     
 }

@@ -65,14 +65,15 @@
                             <div class="form-group mb-3">
                                 <label for="">Discount Code</label>
                                 <input type="text" name="discount_code" id="discount_code" class="form-control">
-                                <small id="discount_message" class="text-success"></small>
-                                <small id="discount_error" class="text-danger"></small>
+                                <small id="discount_message" class="form-text text-success"></small>
+                                <small id="discount_error" class="form-text text-danger"></small>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Total</label>
                                 <input type="text" name="total" id="total" class="form-control" value=""
                                     readonly>
                             </div>
+                            <input type="hidden" name="discount_amount" id="discount_amount">
                             <div class="form-group mb-3">
                                 <input type="submit" class="btn btn-primary" value="Submit">
                             </div>
@@ -104,6 +105,7 @@
             const discountCodeInput = document.getElementById('discount_code');
             const discountMessage = document.getElementById('discount_message');
             const discountError = document.getElementById('discount_error');
+            const discountAmountInput = document.getElementById('discount_amount');
 
             async function checkDiscountCode(code, total) {
                 const response = await fetch('{{ route('check.discount') }}', {
@@ -125,8 +127,12 @@
                     const discountDateValid = new Date(discount.date_valid);
 
                     if (currentDate > discountDateValid) {
-                        discountError.textContent = 'Discount code has expired';
-                        return total;
+                        return {
+                            total,
+                            discountAmount: 0,
+                            message: 'Discount code has expired',
+                            valid: false
+                        };
                     }
 
                     let discountAmount = 0;
@@ -137,11 +143,19 @@
                         discountAmount = discount.total;
                         total -= discountAmount;
                     }
-                    discountMessage.textContent = `Discount found, you get a discount of ${discountAmount}`;
-                    return total;
+                    return {
+                        total,
+                        discountAmount,
+                        message: `Discount found, you get a discount of ${discountAmount}`,
+                        valid: true
+                    };
                 } else {
-                    discountError.textContent = 'Invalid discount code';
-                    return total;
+                    return {
+                        total,
+                        discountAmount: 0,
+                        message: 'Invalid discount code',
+                        valid: false
+                    };
                 }
             }
 
@@ -162,11 +176,18 @@
                 // Apply discount if available
                 const discountCode = discountCodeInput.value;
                 if (discountCode) {
-                    checkDiscountCode(discountCode, total).then(discountedTotal => {
-                        totalInput.value = discountedTotal;
+                    checkDiscountCode(discountCode, total).then(result => {
+                        totalInput.value = result.total;
+                        discountAmountInput.value = result.discountAmount;
+                        if (result.valid) {
+                            discountMessage.textContent = result.message;
+                        } else {
+                            discountError.textContent = result.message;
+                        }
                     });
                 } else {
                     totalInput.value = total;
+                    discountAmountInput.value = 0;
                 }
             }
 

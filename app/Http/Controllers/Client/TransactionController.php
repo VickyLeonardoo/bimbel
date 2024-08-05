@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Discount;
 use Illuminate\Support\Facades\Storage;
 
 class TransactionController extends Controller
@@ -50,10 +51,23 @@ class TransactionController extends Controller
             'course_id.*' => 'exists:courses,id',
             'total' => 'required|numeric',
         ]);
-
-        return $request->all();
-
+        $nowDate = date('Y-m-d');
+        $discount_code = $request->discount_code;
+        $discount_amount = $request->discount_amount;
         $nowYear = date('Y');
+        $use_disc = false;
+        $discount_obj = null;
+
+        if ($discount_code) {
+            $discount_obj = Discount::where('code', $discount_code)->first();
+            if ($discount_obj->status == true && $discount_obj->date_valid >= $nowDate) {
+                $use_disc = true;
+            }
+        } else {
+            $discount_obj = null;
+        }
+
+
         $getRegNoLast = Order::where('user_id', auth()->user()->id)->latest()->first();
         if (!$getRegNoLast) {
             $regNo = 'TRX/' . $nowYear . '/00001';
@@ -70,6 +84,9 @@ class TransactionController extends Controller
                 'date_order' => date('Y-m-d'),
                 'total' => $request->total,
                 'status' => 'draft',
+                'discount_id' => $discount_obj ? $discount_obj->id : null,
+                'use_disc' => $use_disc,
+                'discount_amount' => $discount_amount,
             ]);
 
             foreach ($request->child_id as $child) {
