@@ -41,8 +41,11 @@ Route::get('/register', [RegisterController::class, 'register'])->name('register
 Route::post('/proses-login',[AuthController::class, 'prosesLogin'])->name('proses-login');
 Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
 Route::post('/register',[RegisterController::class, 'store'])->name('store.register');
-
+Route::post('/verification',[RegisterController::class, 'verifyOtp'])->name('verify.otp');
 Route::group(['middleware' => ['auth:user']],function(){
+    Route::get('/verification',[RegisterController::class, 'verifPage'])->name('page.verif');
+    Route::get('/resend/otp',[RegisterController::class, 'reSend'])->name('otp.resend');
+
     Route::group(['middleware' => ['cek_login:1'], 'prefix' => 'admin'],function(){
 
         Route::controller(DashboardController::class)->group(function(){
@@ -128,7 +131,6 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/discount/update/{id}', 'updateStatus')->name('admin.discount.update');
             Route::get('/discount/delete/{id}', 'delete')->name('admin.discount.delete');
         });
-
 
 
 

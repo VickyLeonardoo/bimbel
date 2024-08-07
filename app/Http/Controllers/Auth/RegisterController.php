@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\OtpMail;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\UserVerification;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -38,9 +40,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'phone' => $request->phone,
-            'role' => '1',
-            'is_active' => '1',
-            'is_verified' => '1',
+            'role' => '2',
         ];
         $time = Carbon::now();
         $otp = rand(100000,999999);
@@ -50,21 +50,82 @@ class RegisterController extends Controller
             'otp' => $otp,
             'validTime' =>$time
         ]);
+        Mail::to($user->email)->send(new OtpMail($data,$otp));
+
         $kredensil = array(
             'email' => $request->email,
             'password' => $request->password,
         );
+
         if (Auth::guard('user')->attempt($kredensil)) {
             $user = Auth::guard('user')->user();
-            if ($user->role == '1') {
-                if ($user->is_active == '0') {
-                    return redirect()->route('otp.show');
+            if ($user->role == '2') {
+                if ($user->is_active == true) {
+                    return redirect()->route('page.verif')->with('success','Kamu behrasil Mendaftar, silahkan Periksa Email Kamu untuk Verifikasi OTP  ');
                 }else{
                     return 'pelanggan';
                 }
             }
         }
-        return redirect('/home')->with('message','Kamu behrasil Mendaftar, silahkan Periksa Email Kamu untuk Verifikasi OTP  ');
+    }
+
+    public function verifPage(){
+        return view('auth.verif');
+    }
+
+    public function verifyOtp(Request $request){
+        date_default_timezone_set('Asia/Jakarta');
+        $request->validate([
+            'otp' => 'required|array|size:6',
+            'otp.*' => 'required|string|max:1'
+        ]);
+        $combinedNumber = implode('', $request->input('otp'));
+        
+        $userId = Auth::guard('user')->user()->id;
+        $otp = UserVerification::where('user_id',$userId)->where('otp',$combinedNumber)->first();
+        if (!$otp) {
+            return redirect()->back()->with('message', 'Kode OTP tidak sesuai.');
+        }else{
+            $validTime = $otp->validTime;
+            $currentTime = now();
+            $timeDifference = $currentTime->diffInMinutes($validTime);
+            if ($timeDifference > 5) {
+                return redirect()->back()->with('message', 'Kode OTP sudah tidak berlaku. Silakan kirim ulang OTP.');
+            }else{
+                $user = User::where('id',$userId)->update([
+                    'is_verified' => '1',
+                ]);
+                $otp->delete();
+                return redirect()->route('client.home')->with('success','Kamu berhasil Verifikasi');
+            }
+        }
+    }
+
+    public function resend(){
+        date_default_timezone_set('Asia/Jakarta');
+        $time = Carbon::now();
+        $addTime = $time->addMinutes(5);
+        $userId = Auth::guard('user')->user()->id;
+        $email = User::where('id',$userId)->first();
+        $otp = UserVerification::where('user_id',$userId)->first();
+        $otpNumber = rand(100000,999999);
+        if (!$otp){
+            UserVerification::create([
+                'user_id' => $userId,
+                'otp' => $otpNumber,
+                'validTime' => $addTime,
+            ]);
+            Mail::to($email)->send(new OtpMail($email,$otp['otp']));
+            return response()->json(['success' => true]);
+        }else{
+            $otp->update([
+                'otp' => $otpNumber,
+                'validTime' => $addTime,
+            ]);
+            Mail::to($email)->send(new OtpMail($email,$otp['otp']));
+            return response()->json(['success' => true]);
+
+        }
     }
 
 }

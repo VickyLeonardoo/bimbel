@@ -30,7 +30,7 @@ class TransactionController extends Controller
         return view('client.transaction.create',[
             'title' => 'Transaction',
             'course' => Course::all(),
-            'years' => Year::where('status', 'active')->get(),
+            'years' => Year::where('is_published', true)->get(),
         ]);
     }
 

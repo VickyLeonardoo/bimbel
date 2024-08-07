@@ -24,8 +24,10 @@
                         </div>
                     </div>
                     <div class="member-info">
-                        <h4>Walter White</h4>
-                        <span>Chief Executive Officer</span>
+                        <h4>{{ $item->name }}</h4>
+                        <span>@foreach ($item->courses as $course)
+                           {{ $course->name }}
+                        @endforeach</span>
                         <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut.
                             Ipsum exercitationem iure minima enim corporis et voluptate.</p>
                     </div>
