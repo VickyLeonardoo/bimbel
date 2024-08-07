@@ -67,45 +67,62 @@ class TransactionController extends Controller
             $discount_obj = null;
         }
 
+        $year_id = $request->course_year;
 
-        $getRegNoLast = Order::where('user_id', auth()->user()->id)->latest()->first();
-        if (!$getRegNoLast) {
-            $regNo = 'TRX/' . $nowYear . '/00001';
-        } else {
-            $regNo = 'TRX/' . $nowYear . '/' . str_pad($getRegNoLast->id + 1, 5, '0', STR_PAD_LEFT);
-        }
-
-        DB::beginTransaction();
-        try {
-            $order = Order::create([
-                'user_id' => auth()->user()->id,
-                'year_id' => $request->course_year,
-                'reg_no' => $regNo,
-                'date_order' => date('Y-m-d'),
-                'total' => $request->total,
-                'status' => 'draft',
-                'discount_id' => $discount_obj ? $discount_obj->id : null,
-                'use_disc' => $use_disc,
-                'discount_amount' => $discount_amount,
-            ]);
-
+        foreach ($request->course_id as $course) {
             foreach ($request->child_id as $child) {
-                foreach ($request->course_id as $course) {
-                    $data2 = [
-                        'order_id' => $order->id,
-                        'child_id' => $child,
-                        'course_id' => $course,
-                        'price' => Course::find($course)->price,
-                    ];
-                    OrderItem::create($data2);
+                // Cek apakah kombinasi course_id, child_id, dan year_id sudah ada di order_items
+                $exists = OrderItem::where('course_id', $course)
+                    ->where('child_id', $child)
+                    ->whereHas('order', function($query) use ($year_id) {
+                        $query->where('year_id', $year_id);
+                    })
+                    ->exists();
+        
+                if ($exists) {
+                    return redirect()->back()->with('error','Course already exists for this child and year.');
+                } else {
+                    $getRegNoLast = Order::where('user_id', auth()->user()->id)->latest()->first();
+                    if (!$getRegNoLast) {
+                        $regNo = 'TRX/' . $nowYear . '/00001';
+                    } else {
+                        $regNo = 'TRX/' . $nowYear . '/' . str_pad($getRegNoLast->id + 1, 5, '0', STR_PAD_LEFT);
+                    }
+
+                    DB::beginTransaction();
+                    try {
+                        $order = Order::create([
+                            'user_id' => auth()->user()->id,
+                            'year_id' => $request->course_year,
+                            'reg_no' => $regNo,
+                            'date_order' => date('Y-m-d'),
+                            'total' => $request->total,
+                            'status' => 'draft',
+                            'discount_id' => $discount_obj ? $discount_obj->id : null,
+                            'use_disc' => $use_disc,
+                            'discount_amount' => $discount_amount,
+                        ]);
+
+                        foreach ($request->child_id as $child) {
+                            foreach ($request->course_id as $course) {
+                                $data2 = [
+                                    'order_id' => $order->id,
+                                    'child_id' => $child,
+                                    'course_id' => $course,
+                                    'price' => Course::find($course)->price,
+                                ];
+                                OrderItem::create($data2);
+                            }
+                        }
+                        DB::commit();
+                        return redirect()->route('client.transaction')->with('success', 'Order has been successfully created.');
+                    } catch (\Exception $e) {
+                        DB::rollBack();
+                        Log::error('Error creating order: ' . $e->getMessage());
+                        return back()->withErrors(['error' => 'An error occurred while creating the order. Please try again.'])->withInput();
+                    }
                 }
             }
-            DB::commit();
-            return redirect()->route('client.transaction')->with('success', 'Order has been successfully created.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Error creating order: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'An error occurred while creating the order. Please try again.'])->withInput();
         }
     }
 
@@ -136,6 +153,15 @@ class TransactionController extends Controller
         }
         $order->save();
         return redirect()->route('client.transaction')->with('success', 'Payment proof uploaded successfully.');
+    }
+
+    public function cancel($id){
+        $order = Order::findOrFail($id);
+        if ($order->status == 'draft') {
+            $order->status = 'cancelled';
+            $order->save();
+        }
+        return redirect()->route('client.transaction')->with('success', 'Transaction has been successfully cancelled.');
     }
 
 }

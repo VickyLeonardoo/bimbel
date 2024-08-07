@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/client/transaction/{id}/update', 'update')->name('client.transaction.update');
             Route::get('/client/transaction/{id}/upload', 'viewUpload')->name('client.transaction.page.upload');
             Route::post('/client/transaction/{id}/upload', 'upload')->name('client.transaction.upload');
+            Route::get('/client/transaction/{id}/cancel', 'cancel')->name('client.transaction.cancel');
         });
 
         Route::controller(OrderController::class)->group(function(){

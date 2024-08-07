@@ -17,24 +17,28 @@
             </div>
 
             <div class="col-md-10">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible show fade">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session('success'))
+                    <div class="alert alert-success alert-dismissible show fade">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
                         <form action="{{ route('client.transaction.store') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">

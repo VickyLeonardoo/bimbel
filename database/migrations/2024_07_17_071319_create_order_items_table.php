@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->references('id')->on('orders');
+            $table->foreignId('order_id')->references('id')->on('orders'); 
             $table->foreignId('child_id')->references('id')->on('children');
             $table->foreignId('course_id')->references('id')->on('courses');
             $table->decimal('price', 15, 2);
