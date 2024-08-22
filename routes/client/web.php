@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth:user']],function(){
         });
 
         Route::post('/check-discount', [DiscountController::class, 'checkDiscount'])->name('check.discount');
+        
 
     });
 });

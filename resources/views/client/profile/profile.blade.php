@@ -7,8 +7,8 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <a href="{{route('client.profile')}}" class=" btn form-control btn-outline-primary mb-3 {{Route::is('client.profile') ? 'active':''}}">Profile</a>
-                        <a href="{{route('client.transaction')}}" class=" btn form-control btn-outline-primary">Transaction</a>
+                        <a href="{{route('client.profile')}}" class="btn form-control btn-outline-primary mb-3 {{Route::is('client.profile') ? 'active':''}}">Profile</a>
+                        <a href="{{route('client.transaction')}}" class="btn form-control btn-outline-primary">Transaction</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <h3>Edit Profile</h3>
                     <hr>
                     <h5 style="font-weight: 200; color: #6d6d6d;">Personal Information</h5>
-                    <a href="{{route('client.edit_profile')}}" class="btn btn-sm btn-primary">Edit Profile</a>
+                    <a href="{{route('client.edit_profile')}}" id="btn" class="btn btn-sm btn-primary">Edit Profile</a>
                     <div class="row mb-3">
                         <div class="col-md-6 mt-3">
                             <label for="">Nama</label>
@@ -48,7 +48,7 @@
                     </div>
                     <hr>
                     <h5 style="font-weight: 200; color: #6d6d6d;">Children Information</h5>
-                    <a href="{{route('client.add_children')}}" class="btn btn-sm btn-primary">Add</a>
+                    <a id="btn" href="{{route('client.add_children')}}" class="btn btn-sm btn-primary">Add</a>
                     <table class="table table-striped">
                         <thead>
                             <tr>

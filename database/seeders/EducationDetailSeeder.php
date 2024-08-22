@@ -18,7 +18,7 @@ class EducationDetailSeeder extends Seeder
 
         $levels = ['S1', 'S2', 'S3'];
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             foreach ($levels as $level) {
                 DB::table('education_details')->insert([
                     'instructor_id' => $i,

@@ -17,7 +17,7 @@ class InstructorSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             DB::table('instructors')->insert([
                 'name' => $faker->name,
                 'address' => $faker->address,

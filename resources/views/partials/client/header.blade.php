@@ -42,47 +42,28 @@
     <!-- Latest compiled and minified JavaScript -->
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <style>
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
+        .fixed-size-card {
+            width: 300px; /* Sesuaikan dengan lebar yang diinginkan */
+            height: 400px; /* Sesuaikan dengan tinggi yang diinginkan */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+        }
+        .members-img img {
+            width: 100%;
+            height: 250px; /* Sesuaikan tinggi gambar sesuai dengan perubahan ukuran card */
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .card-body.second {
+            text-align: center; /* Memusatkan teks di dalam card */
         }
 
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-            border-width: .4em;
-        }
-
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            padding: 0;
-            border: 0;
-            clip: rect(0, 0, 0, 0);
-            overflow: hidden;
-            white-space: nowrap;
-            /* 1.2.3 */
-        }
     </style>
 </head>
 
 <body class="index-page d-flex flex-column min-vh-100" style="background-color: #f4f5f7">
-    <div id="loader" style="display: none;">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div style="margin-top: 10px; font-size: 1.2rem; color: #333;">Loading...</div>
-    </div>
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
@@ -152,13 +133,15 @@
     @yield('js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.btn'); // Target semua tombol dengan class 'btn'
-
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
+            // Target tombol dengan id 'btn'
+            const specificButton = document.getElementById('btn');
+    
+            // Tambahkan event listener untuk tombol tersebut
+            if (specificButton) {
+                specificButton.addEventListener('click', function() {
                     document.getElementById('loader').style.display = 'flex';
                 });
-            });
+            }
         });
     </script>
 </body>

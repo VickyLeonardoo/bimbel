@@ -131,8 +131,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/discount/update/{id}', 'updateStatus')->name('admin.discount.update');
             Route::get('/discount/delete/{id}', 'delete')->name('admin.discount.delete');
         });
-
-
+        
 
     });
 });

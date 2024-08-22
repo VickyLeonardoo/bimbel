@@ -19,7 +19,7 @@ class InstructorCourseSeeder extends Seeder
         // Assuming there are already courses in the 'courses' table
         $courseIds = DB::table('courses')->pluck('id')->toArray();
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $coursesToAssign = $faker->numberBetween(1, 2);
             $assignedCourses = $faker->randomElements($courseIds, $coursesToAssign);
 

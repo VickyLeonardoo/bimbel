@@ -8,8 +8,8 @@
                         <div class="card-body">
 
                             <a href="{{ route('client.profile') }}"
-                                class=" btn form-control btn-outline-primary mb-3 {{ Route::is('client.*') ? 'active' : '' }}">Profile</a>
-                            <a href="{{ route('client.transaction') }}" class=" btn form-control btn-outline-primary">Transaction</a>
+                                class="btn form-control btn-outline-primary mb-3 {{ Route::is('client.*') ? 'active' : '' }}">Profile</a>
+                            <a href="{{ route('client.transaction') }}" class="btn form-control btn-outline-primary">Transaction</a>
                         </div>
                     </div>
                 </div>

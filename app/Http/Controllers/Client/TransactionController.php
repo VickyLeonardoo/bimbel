@@ -75,7 +75,7 @@ class TransactionController extends Controller
                 $exists = OrderItem::where('course_id', $course)
                     ->where('child_id', $child)
                     ->whereHas('order', function($query) use ($year_id) {
-                        $query->where('year_id', $year_id);
+                        $query->where('year_id', $year_id)->where('status','payment_received');
                     })
                     ->exists();
         

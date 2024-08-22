@@ -7,8 +7,8 @@
                     <div class="card">
                         <div class="card-body">
                             <a href="{{ route('client.profile') }}"
-                                class=" btn form-control btn-outline-primary mb-3 {{ Route::is('client.*') ? 'active' : '' }}">Profile</a>
-                            <a href="{{ route('client.transaction') }}" class=" btn form-control btn-outline-primary">Transaction</a>
+                                class="btn form-control btn-outline-primary mb-3 {{ Route::is('client.*') ? 'active' : '' }}">Profile</a>
+                            <a href="{{ route('client.transaction') }}" class="btn form-control btn-outline-primary">Transaction</a>
                         </div>
                     </div>
                 </div>
@@ -30,9 +30,9 @@
                         <form action="{{ route('client.update_profile') }}" method="POST">
                             @csrf
                             <div class="text-end">
-                                <button class="btn btn-sm btn-primary">Update</button>
-                                <a href="{{ route('client.profile') }}" class="btn btn-sm btn-danger"><i
-                                        class="fas fa-trash"></i>Discard</a>
+                                <button id="btn" class="btn btn-sm btn-primary">Update</button>
+                                <a href="{{ route('client.profile') }}" id="btn" class="btn btn-sm btn-danger"><i
+                                        class="fas fa-trash" ></i>Discard</a>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6 mt-3">
