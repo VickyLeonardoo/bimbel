@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminEnrollmentController;
 use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\VisionMissionController;
@@ -131,6 +132,13 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/discount/update/{id}', 'update')->name('admin.discount.update');
             Route::get('/discount/update/{id}', 'updateStatus')->name('admin.discount.update.status');
             Route::get('/discount/delete/{id}', 'delete')->name('admin.discount.delete');
+        });
+
+        Route::controller(ProfileController::class)->group(function(){
+            Route::get('/profile/edit', 'edit')->name('admin.profile.edit');
+            Route::post('/profile/update', 'update')->name('admin.profile.update');
+            Route::get('/profile/password', 'editPassword')->name('admin.profile.password');
+            Route::post('/profile/update/password', 'updatePassword')->name('admin.profile.update.password');
         });
         
 

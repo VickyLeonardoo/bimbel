@@ -38,8 +38,10 @@
         .sidebar-footer {
             margin-top: -1cm;
         }
+
         #preloader {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
             position: fixed;
             top: 0;
             left: 0;
@@ -48,6 +50,7 @@
             background: rgba(255, 255, 255, 0.8);
             z-index: 9999;
         }
+
         #preloader .spinner {
             position: absolute;
             top: 50%;
@@ -61,13 +64,25 @@
             -webkit-animation: spin 1s linear infinite;
             animation: spin 1s linear infinite;
         }
+
         @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -142,7 +157,8 @@
                                 <div class="user-menu d-flex">
                                     <div class="user-name text-end me-3">
                                         <h6 class="mb-0 text-gray-600">{{ Auth::guard('user')->user()->name }}</h6>
-                                        <p class="mb-0 text-sm text-gray-600">{{ Auth::guard('user')->user()->role == 1 ? 'Instructor':'Instructor' }}</p>
+                                        <p class="mb-0 text-sm text-gray-600">
+                                            {{ Auth::guard('user')->user()->role == 1 ? 'Instructor' : 'Instructor' }}</p>
 
                                     </div>
                                     <div class="user-img d-flex align-items-center">
@@ -159,6 +175,9 @@
                                 <li><a class="dropdown-item" href="{{ route('instructor.profile') }}"><i
                                             class="icon-mid bi bi-person me-2"></i> My
                                         Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ route('instructor.profile.password') }}"><i
+                                            class="icon-mid bi bi-key me-2"></i> Change
+                                        Password</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -237,11 +256,9 @@
                     [10, 25, 50, "All"]
                 ],
                 dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excelHtml5',
-                    },
-                ]
+                buttons: [{
+                    extend: 'excelHtml5',
+                }, ]
             });
         });
     </script>

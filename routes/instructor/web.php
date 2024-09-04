@@ -20,4 +20,6 @@ Route::controller(AttendingController::class)->group(function(){
 Route::controller(ProfileController::class)->group(function(){
     Route::get('/profile', 'edit')->name('instructor.profile');
     Route::post('/profile/update', 'update')->name('instructor.profile.update');
+    Route::get('/profile/password', 'editPassword')->name('instructor.profile.password');
+    Route::post('/profile/update/password', 'updatePassword')->name('instructor.profile.update.password');
 });

@@ -7,10 +7,11 @@
                     
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{ route('instructor.profile.update') }}" method="POST">
+                        @csrf
                         <div class="form-group mb-3">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" value="{{ $user->email }}" readonly name="email">
+                            <input type="text" class="form-control" disabled value="{{ $user->email }}" readonly name="email">
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Name</label>
