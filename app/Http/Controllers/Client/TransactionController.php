@@ -71,24 +71,29 @@ class TransactionController extends Controller
 
         foreach ($request->course_id as $course) {
             foreach ($request->child_id as $child) {
-                // Cek apakah kombinasi course_id, child_id, dan year_id sudah ada di order_items
+                // Check if the combination of course_id, child_id, and year_id already exists in order_items
                 $exists = OrderItem::where('course_id', $course)
                     ->where('child_id', $child)
                     ->whereHas('order', function($query) use ($year_id) {
-                        $query->where('year_id', $year_id)->where('status','payment_received');
+                        $query->where('year_id', $year_id)->where('status', 'payment_received');
                     })
                     ->exists();
         
                 if ($exists) {
-                    return redirect()->back()->with('error','Course already exists for this child and year.');
+                    return redirect()->back()->with('error', 'Course already exists for this child and year.');
                 } else {
-                    $getRegNoLast = Order::where('user_id', auth()->user()->id)->latest()->first();
-                    if (!$getRegNoLast) {
+                    // Get the last order in the system
+                    $lastOrder = Order::latest()->first();
+                    
+                    // Generate the new reg_no
+                    $nowYear = date('Y');
+                    if (!$lastOrder) {
                         $regNo = 'TRX/' . $nowYear . '/00001';
                     } else {
-                        $regNo = 'TRX/' . $nowYear . '/' . str_pad($getRegNoLast->id + 1, 5, '0', STR_PAD_LEFT);
+                        $lastOrderId = $lastOrder->id;
+                        $regNo = 'TRX/' . $nowYear . '/' . str_pad($lastOrderId + 1, 5, '0', STR_PAD_LEFT);
                     }
-
+        
                     DB::beginTransaction();
                     try {
                         $order = Order::create([
@@ -102,7 +107,7 @@ class TransactionController extends Controller
                             'use_disc' => $use_disc,
                             'discount_amount' => $discount_amount,
                         ]);
-
+        
                         foreach ($request->child_id as $child) {
                             foreach ($request->course_id as $course) {
                                 $data2 = [
@@ -114,6 +119,7 @@ class TransactionController extends Controller
                                 OrderItem::create($data2);
                             }
                         }
+        
                         DB::commit();
                         return redirect()->route('client.transaction')->with('success', 'Order has been successfully created.');
                     } catch (\Exception $e) {
