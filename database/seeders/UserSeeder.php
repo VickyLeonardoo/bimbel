@@ -24,6 +24,15 @@ class UserSeeder extends Seeder
                 'role' => '1',
             ],
             [
+                'name' => 'admin',
+                'phone' => '081275521211',
+                'email' => 'instructor@example.com',
+                'password' => bcrypt('123'),
+                'is_verified' => true,
+                'is_active' => true,
+                'role' => '3',
+            ],
+            [
                 'name' => 'User 1',
                 'phone' => '081275521222',
                 'email' => 'user1@example.com',

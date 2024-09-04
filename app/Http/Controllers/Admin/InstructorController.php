@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Instructor;
 use Illuminate\Support\Str;
@@ -40,7 +41,19 @@ class InstructorController extends Controller
         'course_instructor.*' => 'required'
     ]);
 
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => '123456',
+        'role' => 3,
+        'is_active' => true,
+        'is_verified' => true,
+        'phone' => $request->phone,
+        'address' => $request->address,
+    ]);
+
     $data = [
+        'user_id' => $user->id,
         'name' => $request->name,
         'email' => $request->email,
         'phone' => $request->phone,
@@ -79,6 +92,7 @@ class InstructorController extends Controller
             ]);
         }
     }
+    
 
     return redirect()->route('admin.instructor')->with('success', 'Instructor successfully created');
 }
@@ -96,6 +110,7 @@ class InstructorController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $instructor = Instructor::find($id);
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:instructors,email,'.$id,
@@ -119,14 +134,20 @@ class InstructorController extends Controller
             $image->storeAs('public/instructor', $hashName);
             $data['image'] = $hashName;
         }
-
         Instructor::where('id', $id)->update($data);
+        $user = User::where('id',$instructor->user_id)->first();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
         return redirect()->route('admin.instructor')->with('success', 'Instructor successfully updated');
     }
 
     public function delete($id){
         try {
             $instructor = Instructor::find($id);
+            $user = User::where('id',$instructor->user_id)->first();
             if ($instructor) {
                 // Check and delete the instructor's image
                 if ($instructor->image && file_exists(storage_path('app/public/instructor/' . $instructor->image))) {
@@ -134,6 +155,7 @@ class InstructorController extends Controller
                 }
                 // Attempt to delete the instructor
                 $instructor->delete();
+                $user->delete();
                 return redirect()->route('admin.instructor')->with('success', 'Instructor successfully deleted');
             } else {
                 return redirect()->route('admin.instructor')->with('error', 'Instructor not found');
@@ -186,6 +208,17 @@ class InstructorController extends Controller
     public function deleteCourse($id){
         InstructorCourse::where('id', $id)->delete();
         return redirect()->back()->with('success', 'Course successfully deleted');
+    }
+
+    public function updateStatus($id){
+        $instructor = Instructor::find($id);
+        $user = User::where('id',$instructor->user_id)->first();
+        $instructor->is_active = !$instructor->is_active;
+        $instructor->save();
+        $user->is_active = $instructor->is_active;
+        $user->save();
+
+        return redirect()->route('admin.instructor')->with('success', 'Instructor successfully updated');
     }
     
 }

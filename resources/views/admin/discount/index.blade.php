@@ -33,7 +33,7 @@
                                             <td>{{ $discount->code }}</td>
                                             <td>{{ Carbon\Carbon::parse($discount->date_valid)->format('d F Y') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.discount.update', $discount->id) }}" class="badge {{ $discount->status ? 'bg-success' : 'bg-danger' }}">
+                                                <a href="{{ route('admin.discount.update.status', $discount->id) }}" class="badge {{ $discount->status ? 'bg-success' : 'bg-danger' }}">
                                                     {{ $discount->status ? 'Active' : 'Inactive' }}
                                                 </a>
                                             </td>

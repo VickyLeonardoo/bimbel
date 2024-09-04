@@ -39,6 +39,10 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function instructor(){
+        return $this->hasOne(Instructor::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

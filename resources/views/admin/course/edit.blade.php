@@ -2,6 +2,15 @@
 @section('content')
     <section class="row">
         <div class="col-12 col-lg-12">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                 <div class="card">
                     <div class="card-header text-end">
@@ -24,6 +33,13 @@
                             <label for="">Code</label>
                             <input type="text" class="form-control" name="code" value="{{ $course->code }}">
                             @error('code')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Session</label>
+                            <input type="text" class="form-control" name="session" value="{{ $course->session }}">
+                            @error('session')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

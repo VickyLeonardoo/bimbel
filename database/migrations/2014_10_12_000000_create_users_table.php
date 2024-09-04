@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('is_verified')->default(false);
             $table->boolean('is_active')->default(true);
-            $table->enum('role',[1,2]);
+            $table->enum('role',[1,2,3]);
             $table->timestamps();
         });
     }

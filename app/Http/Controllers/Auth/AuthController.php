@@ -42,6 +42,11 @@ class AuthController extends Controller
                 }else{
                     return redirect()->route('client.profile')->with('success','Selamat Datang');
                 }
+            }else if($user->role == '3'){
+                if ($user->is_active == '0') {
+                    return redirect()->back()->with('message','Akun sudah tidak aktif, silahkan hubungi admin untuk mengaktifkan akun kembali');
+                }
+                return redirect()->route('instructor.dashboard');
             }
         }
         return redirect()->back()->with('message','Login Gagal, Email atau Password Kamu Salah!');

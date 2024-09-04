@@ -25,6 +25,7 @@
                                         <th>Phone</th>
                                         <th>Course </th>
                                         <th>Pendidikan </th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -46,6 +47,7 @@
                                             @endforeach
                                         </td>
                                         {{-- <td> {{ $instructor->address }} </td> --}}
+                                        <td><a href="{{ route('admin.instructor.update.status', $instructor->id) }}" class="badge {{ $instructor->is_active == true ? 'bg-success':'bg-danger' }}">{{ $instructor->is_active == true ? 'Active':'Inactive' }}</a></td>
                                         <td>
                                             <a href="{{ route('admin.instructor.edit', $instructor->slug) }}" class="btn btn-sm bg-primary text-white">EDIT</a>
                                             <a href="{{ route('admin.instructor.delete', $instructor->id) }}" class="btn btn-sm bg-danger text-white">DELETE</a>

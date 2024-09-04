@@ -78,6 +78,7 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/instructor/edit/course/{id}', 'editAddCourse')->name('admin.instructor.edit.add.course');
             Route::get('/instructor/delete/education/{id}', 'deleteEducation')->name('admin.instructor.delete.education');
             Route::get('/instructor/delete/course/{id}', 'deleteCourse')->name('admin.instructor.delete.course');
+            Route::get('/instructor/update/status/{id}', 'updateStatus')->name('admin.instructor.update.status');
         });
 
         Route::controller(VisionMissionController::class)->group(function(){
@@ -128,10 +129,12 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::post('/discount/store', 'store')->name('admin.discount.store');
             Route::get('/discount/edit/{id}', 'edit')->name('admin.discount.edit');
             Route::post('/discount/update/{id}', 'update')->name('admin.discount.update');
-            Route::get('/discount/update/{id}', 'updateStatus')->name('admin.discount.update');
+            Route::get('/discount/update/{id}', 'updateStatus')->name('admin.discount.update.status');
             Route::get('/discount/delete/{id}', 'delete')->name('admin.discount.delete');
         });
         
 
     });
+
+    
 });
