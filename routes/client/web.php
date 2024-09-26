@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\AttendingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\Client\HomeController;
@@ -48,7 +49,11 @@ Route::group(['middleware' => ['auth:user']],function(){
         });
 
         Route::post('/check-discount', [DiscountController::class, 'checkDiscount'])->name('check.discount');
-        
+
+        Route::controller(AttendingController::class)->group(function(){
+            Route::get('/attending', 'index')->name('client.attending');
+            Route::get('/attending/show/', 'show')->name('client.attending.show');
+        });
 
     });
 });

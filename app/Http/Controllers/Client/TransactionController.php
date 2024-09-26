@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Child;
 use App\Models\Discount;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,9 +69,10 @@ class TransactionController extends Controller
         }
 
         $year_id = $request->course_year;
-
+        $errorMessages = [];
         foreach ($request->course_id as $course) {
             foreach ($request->child_id as $child) {
+                $children = Child::find($child);
                 // Check if the combination of course_id, child_id, and year_id already exists in order_items
                 $exists = OrderItem::where('course_id', $course)
                     ->where('child_id', $child)
@@ -80,55 +82,57 @@ class TransactionController extends Controller
                     ->exists();
         
                 if ($exists) {
-                    return redirect()->back()->with('error', 'Course already exists for this child and year.');
-                } else {
-                    // Get the last order in the system
-                    $lastOrder = Order::latest()->first();
+                    $errorMessages[] = "Course already exists for child Name $children->name in this year.";
+                } 
+            }
+        }
+
+        if (!empty($errorMessages)) {
+            return redirect()->back()->with('error', implode(' ', $errorMessages));
+        }
+        $lastOrder = Order::latest()->first();
                     
-                    // Generate the new reg_no
-                    $nowYear = date('Y');
-                    if (!$lastOrder) {
-                        $regNo = 'TRX/' . $nowYear . '/00001';
-                    } else {
-                        $lastOrderId = $lastOrder->id;
-                        $regNo = 'TRX/' . $nowYear . '/' . str_pad($lastOrderId + 1, 5, '0', STR_PAD_LEFT);
-                    }
-        
-                    DB::beginTransaction();
-                    try {
-                        $order = Order::create([
-                            'user_id' => auth()->user()->id,
-                            'year_id' => $request->course_year,
-                            'reg_no' => $regNo,
-                            'date_order' => date('Y-m-d'),
-                            'total' => $request->total,
-                            'status' => 'draft',
-                            'discount_id' => $discount_obj ? $discount_obj->id : null,
-                            'use_disc' => $use_disc,
-                            'discount_amount' => $discount_amount,
-                        ]);
-        
-                        foreach ($request->child_id as $child) {
-                            foreach ($request->course_id as $course) {
-                                $data2 = [
-                                    'order_id' => $order->id,
-                                    'child_id' => $child,
-                                    'course_id' => $course,
-                                    'price' => Course::find($course)->price,
-                                ];
-                                OrderItem::create($data2);
-                            }
-                        }
-        
-                        DB::commit();
-                        return redirect()->route('client.transaction')->with('success', 'Order has been successfully created.');
-                    } catch (\Exception $e) {
-                        DB::rollBack();
-                        Log::error('Error creating order: ' . $e->getMessage());
-                        return back()->withErrors(['error' => 'An error occurred while creating the order. Please try again.'])->withInput();
-                    }
+        // Generate the new reg_no
+        $nowYear = date('Y');
+        if (!$lastOrder) {
+            $regNo = 'TRX/' . $nowYear . '/00001';
+        } else {
+            $lastOrderId = $lastOrder->id;
+            $regNo = 'TRX/' . $nowYear . '/' . str_pad($lastOrderId + 1, 5, '0', STR_PAD_LEFT);
+        }
+
+        DB::beginTransaction();
+        try {
+            $order = Order::create([
+                'user_id' => auth()->user()->id,
+                'year_id' => $request->course_year,
+                'reg_no' => $regNo,
+                'date_order' => date('Y-m-d'),
+                'total' => $request->total,
+                'status' => 'draft',
+                'discount_id' => $discount_obj ? $discount_obj->id : null,
+                'use_disc' => $use_disc,
+                'discount_amount' => $discount_amount,
+            ]);
+
+            foreach ($request->child_id as $child) {
+                foreach ($request->course_id as $course) {
+                    $data2 = [
+                        'order_id' => $order->id,
+                        'child_id' => $child,
+                        'course_id' => $course,
+                        'price' => Course::find($course)->price,
+                    ];
+                    OrderItem::create($data2);
                 }
             }
+
+            DB::commit();
+            return redirect()->route('client.transaction')->with('success', 'Order has been successfully created.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error creating order: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'An error occurred while creating the order. Please try again.'])->withInput();
         }
     }
 

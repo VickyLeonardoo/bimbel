@@ -3,16 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <div class="box mb-5">
-                    <div class="card">
-                        <div class="card-body">
-
-                            <a href="{{ route('client.profile') }}"
-                                class="btn form-control btn-outline-primary mb-3 {{ Route::is('client.*') ? 'active' : '' }}">Profile</a>
-                            <a href="{{ route('client.transaction') }}" class="btn form-control btn-outline-primary">Transaction</a>
-                        </div>
-                    </div>
-                </div>
+                @include('partials.client.sidebar')
             </div>
             <div class="col-md-10">
                 <div id="card-container">

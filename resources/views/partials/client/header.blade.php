@@ -8,10 +8,10 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link href="{{ asset('pendaftar') }}/assets/img/favicon.png" rel="icon">
-    <link href="{{ asset('pendaftar') }}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets') }}/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets') }}/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/icon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>

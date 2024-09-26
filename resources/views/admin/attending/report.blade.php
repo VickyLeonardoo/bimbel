@@ -52,7 +52,7 @@
                                                 @endphp
                                                 @if ($attendance)
                                                     @if ($attendance->status == 'present')
-                                                        <td><span class="text-present">Present</span></td>
+                                                        <td><span class="text-present">Present</span></td> 
                                                     @elseif ($attendance->status == 'absent')
                                                         <td style="background-color: #ff5252"><span class="text-absent">X</span></td>
                                                     @elseif ($attendance->status == 'late')
