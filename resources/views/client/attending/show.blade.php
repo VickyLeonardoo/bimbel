@@ -39,7 +39,8 @@
                                             <td>{{ $child->child->name }}</td>
                                             @foreach ($sessions as $session)
                                                 @php
-                                                    $attendance = $attendances->get($child->child_id)->get($session->id) ?? null;
+                                                    $childAttendance = $attendances->get($child->child_id) ?? null;
+                                                    $attendance = $childAttendance ? $childAttendance->get($session->id) : null;
                                                 @endphp
                                                 @if ($attendance)
                                                     @if ($attendance->status == 'present')

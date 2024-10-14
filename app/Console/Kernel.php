@@ -22,7 +22,6 @@ class Kernel extends ConsoleKernel
         })->everyTwoHours();
     }
 
-
     /**
      * Register the commands for the application.
      */

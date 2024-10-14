@@ -35,13 +35,6 @@
                             consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam
                             et est corrupti.
                         </p>
-                        <div class="text-center text-lg-start">
-                            <a href="#"
-                                class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-                                <span>Read More</span>
-                                <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
@@ -52,72 +45,14 @@
             </div>
         </div>
 
-    </section><!-- /About Section -->
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats section">
-
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="row gy-4">
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="stats-item d-flex align-items-center w-100 h-100">
-                        <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
-                        <div>
-                            <span data-purecounter-start="0" data-purecounter-end="232"
-                                data-purecounter-duration="1" class="purecounter"></span>
-                            <p>Happy Clients</p>
-                        </div>
-                    </div>
-                </div><!-- End Stats Item -->
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="stats-item d-flex align-items-center w-100 h-100">
-                        <i class="bi bi-journal-richtext color-orange flex-shrink-0" style="color: #ee6c20;"></i>
-                        <div>
-                            <span data-purecounter-start="0" data-purecounter-end="521"
-                                data-purecounter-duration="1" class="purecounter"></span>
-                            <p>Projects</p>
-                        </div>
-                    </div>
-                </div><!-- End Stats Item -->
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="stats-item d-flex align-items-center w-100 h-100">
-                        <i class="bi bi-headset color-green flex-shrink-0" style="color: #15be56;"></i>
-                        <div>
-                            <span data-purecounter-start="0" data-purecounter-end="1463"
-                                data-purecounter-duration="1" class="purecounter"></span>
-                            <p>Hours Of Support</p>
-                        </div>
-                    </div>
-                </div><!-- End Stats Item -->
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="stats-item d-flex align-items-center w-100 h-100">
-                        <i class="bi bi-people color-pink flex-shrink-0" style="color: #bb0852;"></i>
-                        <div>
-                            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p>Hard Workers</p>
-                        </div>
-                    </div>
-                </div><!-- End Stats Item -->
-
-            </div>
-
-        </div>
-
-    </section><!-- /Stats Section -->
-
+    </section>
     <!-- Features Section -->
     <section id="features" class="features section">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Features</h2>
-            <p>Our Advacedd Features<br></p>
+            <h2>Visi</h2>
+            <p>Visi Kami Adalah<br></p>
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -131,48 +66,14 @@
                 <div class="col-xl-6 d-flex">
                     <div class="row align-self-center gy-4">
 
+                        @foreach ($visi as $v)
                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                             <div class="feature-box d-flex align-items-center">
                                 <i class="bi bi-check"></i>
                                 <h3>Eos aspernatur rem</h3>
                             </div>
                         </div><!-- End Feature Item -->
-
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Facilis neque ipsa</h3>
-                            </div>
-                        </div><!-- End Feature Item -->
-
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Volup amet volupt</h3>
-                            </div>
-                        </div><!-- End Feature Item -->
-
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Rerum omnis sint</h3>
-                            </div>
-                        </div><!-- End Feature Item -->
-
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Alias possimus</h3>
-                            </div>
-                        </div><!-- End Feature Item -->
-
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="700">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Repellendus molli</h3>
-                            </div>
-                        </div><!-- End Feature Item -->
-
+                        @endforeach
                     </div>
                 </div>
 
@@ -259,7 +160,7 @@
 
     </section><!-- /Alt Features Section -->
 
-    <!-- Testimonials Section -->
+    {{-- <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section">
 
         <!-- Section Title -->
@@ -409,7 +310,7 @@
 
         </div>
 
-    </section><!-- /Testimonials Section -->
+    </section><!-- /Testimonials Section --> --}}
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">

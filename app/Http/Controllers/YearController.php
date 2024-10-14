@@ -55,6 +55,14 @@ class YearController extends Controller
             'end_date' => 'required',
         ]);
 
+        $findDateRange = Year::where('id', '!=', $id)
+                        ->where('start_date', '<', $request->end_date)
+                        ->where('end_date', '>', $request->start_date)
+                        ->first();
+        if ($findDateRange) {
+            return redirect()->back()->with('error','You cant set 2 years at the same time.');
+        }
+
         Year::find($id)->update([
             'name' => $request->name,
             'start_date' => $request->start_date,
