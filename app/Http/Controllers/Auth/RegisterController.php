@@ -74,7 +74,7 @@ class RegisterController extends Controller
     }
 
     public function verifyOtp(Request $request){
-        date_default_timezone_set('Asia/Jakarta');
+        // date_default_timezone_set('Asia/Jakarta');
         $request->validate([
             'otp' => 'required|array|size:6',
             'otp.*' => 'required|string|max:1'

@@ -14,7 +14,7 @@ class AttendingController extends Controller
 {
     public function index(){
         return view('instructor.attending.index',[
-            'title' => 'Course List',
+            'title' => 'Attending List',
             'courses' => Course::all(),
             'year' => Year::all(),
         ]);
