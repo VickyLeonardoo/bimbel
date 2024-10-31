@@ -43,6 +43,15 @@ Route::post('/proses-login',[AuthController::class, 'prosesLogin'])->name('prose
 Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
 Route::post('/register',[RegisterController::class, 'store'])->name('store.register');
 Route::post('/verification',[RegisterController::class, 'verifyOtp'])->name('verify.otp');
+Route::get('/reset-password',[AuthController::class, 'show_reset'])->name('show.reset');
+Route::post('/reset-password',[AuthController::class, 'reset_password'])->name('reset.password');
+
+Route::get('/reset-password/{token}', [AuthController::class, 'show_reset_password'])
+    ->name('show.reset.password');
+Route::post('/action/reset-password/', [AuthController::class, 'action_reset_password'])
+    ->name('action.password.reset');
+    
+
 Route::group(['middleware' => ['auth:user']],function(){
     Route::get('/verification',[RegisterController::class, 'verifPage'])->name('page.verif');
     Route::get('/resend/otp',[RegisterController::class, 'reSend'])->name('otp.resend');

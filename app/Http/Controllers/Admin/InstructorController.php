@@ -38,7 +38,8 @@ class InstructorController extends Controller
         'level.*' => 'required', // Add validation for dynamic fields
         'degree.*' => 'required',
         'university.*' => 'required',
-        'course_instructor.*' => 'required'
+        'course_instructor.*' => 'required',
+        'image' => 'required',
     ]);
 
     $user = User::create([

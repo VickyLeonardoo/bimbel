@@ -106,7 +106,7 @@
                                     class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"
                                     value="Login"></button>
                                 <p style="font-size: large;" class="fw-bold mt-2 pt-1 mb-0">Lupa Password? <a
-                                        href="#" class="link-danger">Reset Password</a></p>
+                                        href="{{ route('show.reset') }}" class="link-danger">Reset Password</a></p>
                             </div>
                         </form>
                     </div>
