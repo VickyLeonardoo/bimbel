@@ -209,7 +209,7 @@ class InstructorController extends Controller
 
         InstructorCourse::create($data);
         return redirect()->route('admin.instructor.edit', $instructor->slug)->with('success', 'Add Course successfully updated');
-    }
+    } 
 
     public function deleteCourse($id){
         InstructorCourse::where('id', $id)->delete();

@@ -24,8 +24,8 @@
                                         <td>{{ $loop->iteration }} </td>
                                         <td>{{ $misi->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.instructor.edit', $misi->id) }}" class="btn btn-sm bg-primary text-white">EDIT</a>
-                                            <a href="{{ route('admin.instructor.delete', $misi->id) }}" class="btn btn-sm bg-danger text-white">DELETE</a>
+                                            <a href="{{ route('admin.misi.edit', $misi) }}" class="btn btn-sm bg-primary text-white">EDIT</a>
+                                            <a href="{{ route('admin.misi.delete', $misi) }}" class="btn btn-sm bg-danger text-white">DELETE</a>
                                         </td>
                                     </tr>
                                     @endforeach

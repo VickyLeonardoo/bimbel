@@ -50,7 +50,7 @@ Route::get('/reset-password/{token}', [AuthController::class, 'show_reset_passwo
     ->name('show.reset.password');
 Route::post('/action/reset-password/', [AuthController::class, 'action_reset_password'])
     ->name('action.password.reset');
-    
+     
 
 Route::group(['middleware' => ['auth:user']],function(){
     Route::get('/verification',[RegisterController::class, 'verifPage'])->name('page.verif');
@@ -95,10 +95,20 @@ Route::group(['middleware' => ['auth:user']],function(){
             Route::get('/visi', 'visi')->name('admin.visi');
             Route::get('/visi/create', 'visi_create')->name('admin.visi.create');
             Route::post('/visi/store', 'visi_store')->name('admin.visi.store');
+            
+            Route::get('/visi/edit/{visi_misi:id}', 'visi_edit')->name('admin.visi.edit');
+            Route::post('/visi/update/{visi_misi:id}', 'visi_update')->name('admin.visi.update');
+
+            Route::get('/visi/delete/{visi_misi:id}', 'visi_delete')->name('admin.visi.delete');
 
             Route::get('/misi', 'misi')->name('admin.misi');
             Route::get('/misi/create', 'misi_create')->name('admin.misi.create');
             Route::post('/misi/store', 'misi_store')->name('admin.misi.store');
+
+            Route::get('/misi/edit/{visi_misi:id}', 'misi_edit')->name('admin.misi.edit');
+            Route::post('/misi/update/{visi_misi:id}', 'misi_update')->name('admin.misi.update');
+
+            Route::get('/misi/delete/{visi_misi:id}', 'misi_delete')->name('admin.misi.delete');
         });
         
         Route::controller(YearController::class)->group(function(){

@@ -59,5 +59,54 @@ class VisionMissionController extends Controller
         return redirect()->route('admin.misi')->with('success','Vission successfully created');
     }
 
+    public function visi_edit(VisiMisi $visiMisi){
+        return view('admin.visi.edit',[
+            'visi' => $visiMisi,
+            'title' => 'Edit Vision'
+        ]);
+    }
+
+    public function visi_update(Request $request, VisiMisi $visiMisi){
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $data = [
+            'name' => $request->name,
+            'type' => 'visi',
+        ];
+
+        $visiMisi->update($data);
+        return redirect()->back()->with('success','Vission successfully updated');
+    }
+
+    public function visi_delete(VisiMisi $visiMisi){
+        $visiMisi->delete();
+        return redirect()->back()->with('success','Vission successfully deleted');
+    }
+
+    public function misi_edit(VisiMisi $visiMisi){
+        return view('admin.misi.edit',[
+            'visi' => $visiMisi,
+            'title' => 'Edit Vision'
+        ]);
+    }
+
+    public function misi_update(Request $request, VisiMisi $visiMisi){
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $data = [
+            'name' => $request->name,
+        ];
+
+        $visiMisi->update($data);
+        return redirect()->back()->with('success','Vission successfully updated');
+    }
+
+    public function misi_delete(VisiMisi $visiMisi){
+        $visiMisi->delete();
+        return redirect()->back()->with('success','Vission successfully deleted');
+    }
+
     
 }

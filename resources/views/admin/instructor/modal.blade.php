@@ -115,7 +115,7 @@
                     <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Close</span>
                 </button>
-                <a href="{{route('admin.instructor.delete.course',$course->id)}}')}}" type="button" class="btn btn-danger ms-1">
+                <a href="{{route('admin.instructor.delete.course',$course->id)}}" type="button" class="btn btn-danger ms-1">
                     <i class="bx bx-check d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Yes, Delete it!.</span>
                 </a>

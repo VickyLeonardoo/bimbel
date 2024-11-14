@@ -17,15 +17,15 @@
                                         <th>Name</th>
                                         <th>Action</th>
                                     </tr>
-                                </thead>
+                                </thead> 
                                 <tbody>
                                     @foreach ($visions as $visi)
                                     <tr>
                                         <td>{{ $loop->iteration }} </td>
                                         <td>{{ $visi->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.instructor.edit', $visi->id) }}" class="btn btn-sm bg-primary text-white">EDIT</a>
-                                            <a href="{{ route('admin.instructor.delete', $visi->id) }}" class="btn btn-sm bg-danger text-white">DELETE</a>
+                                            <a href="{{ route('admin.visi.edit', $visi) }}" class="btn btn-sm bg-primary text-white">EDIT</a>
+                                            <a href="{{ route('admin.visi.delete', $visi) }}" class="btn btn-sm bg-danger text-white">DELETE</a>
                                         </td>
                                     </tr>
                                     @endforeach
