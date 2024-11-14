@@ -31,7 +31,7 @@ class InstructorController extends Controller
 {
     $request->validate([
         'name' => 'required',
-        'email' => 'required|email|unique:instructors',
+        'email' => 'required|email|unique:users,email',
         'phone' => 'required',
         'address' => 'required',
         'gender' => 'required',
@@ -41,6 +41,11 @@ class InstructorController extends Controller
         'course_instructor.*' => 'required',
         'image' => 'required',
     ]);
+
+    $checkInstructor = Instructor::where('email',$request->email)->first();
+    if ($checkInstructor) {
+        return redirect()->back()->with('error', 'Instructor with this email already exists')->withInput();
+    }
 
     $user = User::create([
         'name' => $request->name,
