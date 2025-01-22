@@ -26,7 +26,7 @@ class RegisterController extends Controller
             'password_confirmation' => 'required|same:password',
             'phone' => 'required|string|max:255'
         ],[
-            'name.required' => 'Nama wajib diisi',
+            'name.required' => 'Nama wajib ',
             'email.required' => 'Email wajib diisi',
             'email.email' => 'Email tidak valid',
             'password.required' => 'Password wajib diisi',

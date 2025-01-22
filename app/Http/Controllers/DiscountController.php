@@ -14,7 +14,7 @@ class DiscountController extends Controller
             'title' => 'Discount List',
             'discounts' => Discount::all(),
         ]);
-    }
+    } 
 
     public function create(){
         return view('admin.discount.create',[
