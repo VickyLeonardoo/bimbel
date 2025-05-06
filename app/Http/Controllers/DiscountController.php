@@ -72,8 +72,13 @@ class DiscountController extends Controller
     }
 
     public function delete(Request $request, $id){
+        try {
         Discount::find($id)->delete();
         return redirect()->route('admin.discount')->with('success','Discount Deleted Successfully');
+        } catch (\Illuminate\Database\QueryException $e) {  
+            // Handle the foreign key constraint violation (SQLSTATE 23000)
+            return redirect()->back()->with('error',' Discount deleted failed, related on another field');
+        }
     }
 
     public function updateStatus($id){

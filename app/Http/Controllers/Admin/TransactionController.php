@@ -77,7 +77,7 @@ class TransactionController extends Controller
         ];
 
         // Simpan data enrollment
-        Enrollment::create($data);
+        $enr = Enrollment::create($data);
 
         // Ambil sesi dari kursus
         $sessions = Course::find($item->course_id)->sessions;
@@ -86,10 +86,11 @@ class TransactionController extends Controller
             // Siapkan data untuk attendance
             $attendanceData = [
                 'child_id' => $item->child_id,
-                'session_id' => $session->id,
+                'session_id' => $session->id, 
                 'status' => null, // Status dapat diset sesuai kebutuhan
                 'year_id' => $order->year_id,
                 'class' => $item->child->class,
+                'enrollment_id' => $enr->id,
             ];
 
             // Simpan data attendance

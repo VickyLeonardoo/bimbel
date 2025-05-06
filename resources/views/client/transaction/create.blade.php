@@ -5,7 +5,6 @@
             <div class="col-md-2">
                 @include('partials.client.sidebar')
             </div>
-
             <div class="col-md-10">
                 @if ($errors->any())
                     <div class="alert alert-danger">

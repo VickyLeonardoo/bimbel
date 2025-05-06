@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('course_id')->references('id')->on('courses');
             $table->decimal('price', 15, 2);
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

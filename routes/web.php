@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1153587176.
-use App\Http\Controllers\AdminEnrollmentController;
+use App\Http\Controllers\AdminEnrollmentController; 
 use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\ProfileController;

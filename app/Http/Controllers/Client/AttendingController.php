@@ -46,6 +46,7 @@ class AttendingController extends Controller
 
         $findChild = Enrollment::where('year_id', $year_id)
             ->where('course_id', $course->id)
+            ->where('child_id', $request->child_id)
             ->with('child')
             ->get();
 
@@ -80,7 +81,7 @@ class AttendingController extends Controller
                         case 'permission':
                             $permissionCount++;
                             break;
-                        default:
+                        default: 
                             $notStartedCount++; // Untuk kasus status null atau belum dimulai
                     }
                 }

@@ -15,7 +15,7 @@
                             <div class="col-lg-4">
                                 Total Participant
                                 <strong>
-                                    <h3>{{ $enrollments->count() }}</h3>
+                                    <h3>{{ $enrollment_count }}</h3>
                                 </strong>
                             </div> 
                         </div>

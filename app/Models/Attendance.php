@@ -18,4 +18,8 @@ class Attendance extends Model
     public function session(){
         return $this->belongsTo(Session::class);
     }
+
+    public function enrollment(){
+        return $this->belongsTo(Enrollment::class);
+    }
 }

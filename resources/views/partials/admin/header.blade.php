@@ -28,6 +28,13 @@
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/compiled/css/iconly.css">
     <style>
+        table.dataTable tbody tr.odd {
+        background-color: #f0f8ff; /* warna baris ganjil */
+        }
+
+        table.dataTable tbody tr.even {
+        background-color: #ffffff; /* warna baris genap */
+        }
         .sidebar-menu {
             display: flex;
             flex-direction: column;
@@ -100,7 +107,7 @@
                         <div class="logo">
                             <a href="#"><img src="{{ asset('assets/logo-color.png') }}" alt="Logo" style="width: 100px; height: auto;"></a>
                         </div>
-                        <div class="sidebar-toggler  x">
+                        <div class="sidebar-toggler  x"> 
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i
                                     class="bi bi-x bi-middle"></i></a>
                         </div>

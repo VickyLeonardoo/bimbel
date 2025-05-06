@@ -43,7 +43,7 @@ class AttendingController extends Controller
             'years' => Year::all(),
             'course' => $course,
             'selected_year' => $year_id,
-            'attendees' => Attendance::where('session_id', $request->get('session_id'))->where('year_id', $year_id)->where('class', $class)->with('child')->get(),
+            'attendees' => Attendance::where('session_id', $request->get('session_id'))->where('year_id', $year_id)->where('class', $class)->where('is_active',true)->with('child')->get(),
             'selected_session' => $ses_id,
             'classes' => $classes,
             'selected_class' => $class,

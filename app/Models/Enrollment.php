@@ -14,6 +14,10 @@ class Enrollment extends Model
     public function child(){
         return $this->belongsTo(Child::class);
     }
+
+    public function attendances(){
+        return $this->hasMany(Attendance::class);
+    }
     
 
 }

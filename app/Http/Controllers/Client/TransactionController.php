@@ -70,7 +70,7 @@ class TransactionController extends Controller
 
         $year_id = $request->course_year;
         $errorMessages = [];
-        foreach ($request->course_id as $course) {
+        foreach ($request->course_id as $course) { 
             foreach ($request->child_id as $child) {
                 $children = Child::find($child);
                 // Check if the combination of course_id, child_id, and year_id already exists in order_items

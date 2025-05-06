@@ -20,7 +20,7 @@
                             <!-- <div class="col-md-4 mt-3"> -->
                             <!-- </div> -->
                         </div>
-                        <h3>Transaction List</h3>
+                        <h3>DAftar Transakasi</h3>
                         <a href="{{ route('client.transaction.create') }}" class="btn btn-sm btn-primary">Add Transaction</a>
                         <div class="table-responsive">
                             <table class="table table-striped mt-3" id="table1">

@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void 
+    public function up(): void  
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('year_id')->references('id')->on('years');
             $table->boolean('is_active')->default(true);
             $table->text('reason')->nullable();
-            $table->string('class');
+            $table->string('class'); 
             $table->timestamps();
         });
     }

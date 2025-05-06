@@ -45,12 +45,13 @@ class EnrollmentController extends Controller
         }
 
         $enrollments = $query->get();
-
-        return view('admin.enrollment.show', [
+        $enrollment_count = $enrollments->where('status', 'approved')->count();
+        return view('admin.enrollment.show', [ 
             'title' => 'Enrollment Detail',
-            'course' => Course::find($course_id),
+            'course' => Course::find($course_id), 
             'years' => Year::all(),
             'enrollments' => $enrollments,
+            'enrollment_count' => $enrollment_count,
         ]);
     }
 
@@ -59,10 +60,19 @@ class EnrollmentController extends Controller
         $enrollment = Enrollment::findOrFail($id);
         if ($enrollment->status == 'approved') {
             $enrollment->status = 'rejected';
+            // Set is_active to false for related attendances
+            $enrollment->attendances()->update(['is_active' => false]);
+
+            
         } else {
             $enrollment->status = 'approved';
+            $enrollment->attendances()->update(['is_active' => true]);
         }
         $enrollment->save();
         return redirect()->back()->with('success', 'Enrollment updated successfully!');
+    }
+
+    public function delete_attendance(){
+
     }
 }
