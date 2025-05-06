@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth:user']],function(){
         });
 
         Route::controller(VisionMissionController::class)->group(function(){
-            Route::get('/visi', 'visi')->name('admin.visi');
+            Route::get('/visi', 'visi')->name('admin.visi'); 
             Route::get('/visi/create', 'visi_create')->name('admin.visi.create');
             Route::post('/visi/store', 'visi_store')->name('admin.visi.store');
             

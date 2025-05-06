@@ -212,7 +212,7 @@ class InstructorController extends Controller
     } 
 
     public function deleteCourse($id){
-        InstructorCourse::where('id', $id)->delete();
+        InstructorCourse::where('course_id', $id)->delete();
         return redirect()->back()->with('success', 'Course successfully deleted');
     }
 

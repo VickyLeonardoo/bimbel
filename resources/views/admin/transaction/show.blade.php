@@ -35,9 +35,9 @@
                                     <div class="media">
                                         <div class="media-body m-l-20">
                                             <h4 class="media-heading">Bimbel BUC TEVA</h4>
-                                            <p> hello@universal.in<br>
+                                            {{-- <p> hello@universal.in<br>
                                                 <span class="digits">289-335-6503</span>
-                                            </p>
+                                            </p> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -56,9 +56,8 @@
                                 <div class="col-md-4">
                                     <div class="media">
                                         <div class="media-body">
-                                            <h4 class="media-heading">Johan Deo</h4>
-                                            <p>JohanDeo@gmail.com<br>
-                                                <span class="digits">555-555-5555</span>
+                                            <h4 class="media-heading">{{ $order->user->name }}</h4>
+                                            <p>{{ $order->user->email }}<br>
                                             </p>
                                         </div>
                                     </div>
